@@ -13,16 +13,15 @@ public class Course
 {
 	private String courseID;
 	private String title;
-	private String instructor;
 	private String schedule;
 	private List<Student> enrolledStudents;
 	private Teacher teacher;
 	
-	public Course(String courseID, String title, String instructor, String schedule) 
+	public Course(String courseID, String title, Teacher teacher, String schedule) 
 	{
 		this.courseID = courseID;
 		this.title = title;
-		this.instructor = instructor;
+		this.teacher = teacher;
 		this.schedule = schedule;
 		this.enrolledStudents = new ArrayList<>();
 	}
@@ -47,14 +46,14 @@ public class Course
 		this.title = title;
 	}
 
-	public String getInstructor() 
+	public Teacher getTeacher() 
 	{
-		return instructor;
+		return teacher;
 	}
 
-	public void setInstructor(String instructor) 
+	public void setTeacher(Teacher teacher) 
 	{
-		this.instructor = instructor;
+		this.teacher = teacher;
 	}
 
 	public String getSchedule() 
@@ -82,13 +81,16 @@ public class Course
 		return avail;
 	}
 	
-	public void display() 
+	public void displayCourse() 
 	{
 		System.out.println("Course Code:"+ courseID);
 		System.out.println("Title: "+ title);
-		System.out.println("Instructor: "+ instructor);
+		System.out.println("Teacher: "+ teacher);
 		System.out.println("Schedule: " + schedule);
 	}
+	
+	
+	// CHANGE THIS, add to specific course
 	
 	// Method to enroll a student in the course
     public void enrollStudent(Student student) 
@@ -96,9 +98,13 @@ public class Course
         enrolledStudents.add(student);
     }
 
+    //CHANGE THIS, add to specific course
+    
     // Method to assign a teacher to the course
     public void assignTeacher(Teacher assignedTeacher) 
     {
         this.teacher = assignedTeacher;
     }
+    
+    
 }
