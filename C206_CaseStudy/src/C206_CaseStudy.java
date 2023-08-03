@@ -7,8 +7,8 @@ public class C206_CaseStudy {
 		
 		if(user.equalsIgnoreCase("admin")) {
 			adminPage();
-		}
-	}
+		} 
+	} //End of main method
 	
 	public static void adminMenu() {
 		System.out.println("1. Course Management");
@@ -16,12 +16,13 @@ public class C206_CaseStudy {
 		System.out.println("3. User Management");
 		System.out.println("4. Student Management");
 		System.out.println("5. Reports (NOT WORKING!)");
-	}
+		System.out.println("6. Quit");
+	} //End of adminMenu method
 	
 	private static void adminPage() {
 		String username = Helper.readString("Enter Username: ");
 		String password = Helper.readString("Enter Password: ");
-	
+		
 			// Create for loop to check if correct
 			if(username.equals("bob") && password.equals("1")) {
 
@@ -36,6 +37,8 @@ public class C206_CaseStudy {
 						
 					} else if(option == 2) {
 						
+						FeeManagementMain.feeManagementPage();
+						
 					} else if(option == 3) {
 						
 					} else if(option == 4) {
@@ -49,5 +52,5 @@ public class C206_CaseStudy {
 					}
 				}
 			}
-	}
+	} //End of adminPage method
 }

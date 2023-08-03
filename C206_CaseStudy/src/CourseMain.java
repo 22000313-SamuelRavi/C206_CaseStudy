@@ -32,7 +32,7 @@ public class CourseMain {
     public static void menu() 
     {
     	Helper.line(40, "=");
-    	System.out.println("*** WELCOME TO COURSE DETAILS MENU ***");
+    	System.out.println("*** WELCOME TO COURSE DETAILS ***");
     	Helper.line(40, "=");
         System.out.println("1. Add a new course");
         System.out.println("2. View all courses");

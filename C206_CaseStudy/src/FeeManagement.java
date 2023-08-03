@@ -1,16 +1,17 @@
-import java.util.Date;
-
+import java.time.*;
 
 public class FeeManagement {
 
 	private double feeAmount;
 	private String feeType;
-	private Date feeDueDate;
+	private LocalDate feeDueDate;
+	private String studentId;
 	
-	public FeeManagement(double feeAmt, String feeType, Date feeDD) {
+	public FeeManagement(double feeAmt, String feeType, LocalDate feeDD, String studentId) {
 		feeAmount = feeAmt;
 		this.feeType = feeType;
 		feeDueDate = feeDD;
+		this.studentId = studentId;
 	}
 
 	public double getFeeAmount() {
@@ -29,12 +30,16 @@ public class FeeManagement {
 		this.feeType = feeType;
 	}
 
-	public Date getFeeDueDate() {
+	public LocalDate getFeeDueDate() {
 		return feeDueDate;
 	}
 
-	public void setFeeDueDate(Date feeDueDate) {
+	public void setFeeDueDate(LocalDate feeDueDate) {
 		this.feeDueDate = feeDueDate;
+	}
+	
+	public String getStudentId() {
+		return studentId;
 	}
 	
 }
