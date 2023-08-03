@@ -37,8 +37,7 @@ public class C206_CaseStudy {
         System.out.println("1. Add a new course");
         System.out.println("2. View all courses");
         System.out.println("3. Delete an existing course");
-        System.out.println("4. Quit");
-        System.out.println();
+        System.out.println("4. Quit\n");
     }
 
     public static void viewCourse(ArrayList<Course> courseList) {
@@ -101,8 +100,7 @@ public class C206_CaseStudy {
     	Helper.line(40, "=");
     	System.out.println("1. View Enrolled Courses");
         System.out.println("2. View Grades");
-        System.out.println("3. Return to Main Menu");
-        System.out.println();
+        System.out.println("3. Return to Main Menu\n");
     }
     
     public static void viewEnrolledCourses(ArrayList<Course> enrolledCourses) 
@@ -148,8 +146,7 @@ public class C206_CaseStudy {
             output += String.format("%-15s %-40s %-30s %-15s\n", course.getCourseID(), course.getTitle(),
                     course.getInstructor(), course.getSchedule().toString());
         }
-        System.out.println();
-        System.out.println(output);
+        System.out.println("\n" + output);
     }
     	
     
