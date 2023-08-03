@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 
 public class CourseMain {
-    public void coursePage() {
+    public static void coursePage() {
         // TODO Auto-generated method stub
         ArrayList<Course> courseList = new ArrayList<Course>();
-//        courseList.add(new Course("C206", "Software Development Process", "Serene Yong", "Thursday"));
-//        courseList.add(new Course("C209", "Advanced Object-Oriented Programming", "Yeo Koon Huat", "Friday"));
-//        courseList.add(new Course("C236", "Web Application Development in .Net", "Hew Ka Kian", "Monday"));
-//        courseList.add(new Course("C328", "Intelligent Networks", "Ivan Wee", "Wednesday"));
-//        courseList.add(new Course("C327", "Internet Server Technologies", "Sharmila Kanna", "Tuesday"));
+        courseList.add(new Course("C206", "Software Development Process", "Serene Yong", "Thursday"));
+        courseList.add(new Course("C209", "Advanced Object-Oriented Programming", "Yeo Koon Huat", "Friday"));
+        courseList.add(new Course("C236", "Web Application Development in .Net", "Hew Ka Kian", "Monday"));
+        courseList.add(new Course("C328", "Intelligent Networks", "Ivan Wee", "Wednesday"));
+        courseList.add(new Course("C327", "Internet Server Technologies", "Sharmila Kanna", "Tuesday"));
 
         int option = 0;
         while (option != -1) {
@@ -71,10 +71,10 @@ public class CourseMain {
         }
 
         String title = Helper.readString("Course Title > ");
-//        Teacher teacher = Helper.readString("Instructor > ");
+        String teacher = Helper.readString("Teacher > ");
         String schedule = Helper.readString("Schedule > ");
 
-//        courseList.add(new Course(code, title, teacher, schedule));
+        courseList.add(new Course(code, title, teacher, schedule));
         System.out.println("Course added successfully!");
     }
 
@@ -126,7 +126,8 @@ public class CourseMain {
             {
             case 1:
                 ArrayList<Course> enrolledCourses = null;
-				viewEnrolledCourses(enrolledCourses); // Assuming you have a list of enrolled courses for the student
+				viewEnrolledCourses(enrolledCourses);
+				// Assuming you have a list of enrolled courses for the student
                 break;
                 
             case 2:

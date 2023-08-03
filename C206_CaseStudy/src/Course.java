@@ -15,9 +15,9 @@ public class Course
 	private String title;
 	private String schedule;
 	private List<Student> enrolledStudents;
-	private Teacher teacher;
+	private String teacher;
 	
-	public Course(String courseID, String title, Teacher teacher, String schedule) 
+	public Course(String courseID, String title, String teacher, String schedule) 
 	{
 		this.courseID = courseID;
 		this.title = title;
@@ -46,12 +46,12 @@ public class Course
 		this.title = title;
 	}
 
-	public Teacher getTeacher() 
+	public String getTeacher() 
 	{
 		return teacher;
 	}
 
-	public void setTeacher(Teacher teacher) 
+	public void setTeacher(String teacher) 
 	{
 		this.teacher = teacher;
 	}
@@ -101,7 +101,7 @@ public class Course
     //CHANGE THIS, add to specific course
     
     // Method to assign a teacher to the course
-    public void assignTeacher(Teacher assignedTeacher) 
+    public void assignTeacher(String assignedTeacher) 
     {
         this.teacher = assignedTeacher;
     }
