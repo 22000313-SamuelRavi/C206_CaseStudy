@@ -3,6 +3,12 @@ import java.util.ArrayList;
 
 public class StudentManagement {
 
+	private static final int OPTION_QUIT = 4;
+	private static final int OPTION_DELETE = 3;
+	private static final int OPTION_ADD = 2;
+	private static final int OPTION_VIEW = 1;
+	
+
 	public static void studentManagementPage() {
 
 		ArrayList<Student> studentList = new ArrayList<Student>();
@@ -15,19 +21,19 @@ public class StudentManagement {
 
 		int option = 0;
 
-		while (option != 4) {
+		while (option != OPTION_QUIT) {
 
 			StudentManagement.menu();
 			option = Helper.readInt("Enter an option > ");
 
-			if (option == 1) {
+			if (option == OPTION_VIEW) {
 				viewAllStudent(studentList);
-			} else if (option == 2) {
+			} else if (option == OPTION_ADD) {
 				addNewStudent(studentList);
-			} else if (option == 3) {
+			} else if (option == OPTION_DELETE) {
 				deleteStudent(studentList);
-			} else if (option == 4) {
-				System.out.println("Thank you for using Student Management!\n.");
+			} else if (option == OPTION_QUIT) {
+				System.out.println("Thank you for using Student Management!\n");
 			} else {
 				System.out.println("Invalid option selected");
 			}
@@ -72,9 +78,10 @@ public class StudentManagement {
 
 		for (Student s : studentList) {
 			if (studentList != null) {
-				if (id.equalsIgnoreCase(s.getStudentID())) {
+				String studentID = s.getStudentID();
+				if (id.equalsIgnoreCase(studentID)) {
 					System.out.print("");
-					System.out.println("The Student ID has already added");
+					System.out.println("The student ID has already added");
 					isAdded = true;
 					break;
 
@@ -103,7 +110,8 @@ public class StudentManagement {
 
 		for (Student s : studentList) {
 
-			if (id.equalsIgnoreCase(s.getStudentID())) {
+			String studentID = s.getStudentID();
+			if (id.equalsIgnoreCase(studentID)) {
 				String sDelete = Helper.readString("Confirm deletion (y/n) > ");
 
 				if (sDelete.equals("y") || sDelete.equals("Y")) {
