@@ -1,7 +1,12 @@
 import java.util.ArrayList;
 
 public class CourseMain {
-    public static void coursePage() {
+    private static final int OPTION_QUIT = 4;
+	private static final int OPTION_DELETE = 3;
+	private static final int OPTION_VIEW = 2;
+	private static final int OPTION_ADD = 1;
+
+	public static void coursePage() {
         // TODO Auto-generated method stub
         ArrayList<Course> courseList = new ArrayList<Course>();
         courseList.add(new Course("C206", "Software Development Process", "Serene Yong", "Thursday"));
@@ -11,18 +16,18 @@ public class CourseMain {
         courseList.add(new Course("C327", "Internet Server Technologies", "Sharmila Kanna", "Tuesday"));
 
         int option = 0;
-        while (option != -1) {
+        while (option != OPTION_QUIT) {
             menu();
             int choice = Helper.readInt("Enter an option > ");
-            if (choice == 1) {
+            if (choice == OPTION_ADD) {
                 addCourse(courseList);
-            } else if (choice == 2) {
+            } else if (choice == OPTION_VIEW) {
                 viewCourse(courseList);
-            } else if (choice == 3) {
+            } else if (choice == OPTION_DELETE) {
                 deleteCourse(courseList);
-            } else if (choice == 4) {
+            } else if (choice == OPTION_QUIT) {
                 System.out.println("Thank you for using Tuition Management System.");
-                option = -1;
+                option = OPTION_QUIT;
             } else {
                 System.out.println("Invalid option. Please try again.");
             }
@@ -58,7 +63,8 @@ public class CourseMain {
             code = Helper.readString("Course Code > ");
             boolean courseFound = false;
             for (Course course : courseList) {
-                if (code.equalsIgnoreCase(course.getCourseID())) {
+                String courseID = course.getCourseID();
+				if (code.equalsIgnoreCase(courseID)) {
                     System.out.println("Course with code " + code + " already exists.");
                     courseFound = true;
                     break;
@@ -118,7 +124,7 @@ public class CourseMain {
     public static void studentMenu(ArrayList<Course> courseList) 
     {
     	int option = 0;
-    	while (option != -1) 
+    	while (option != OPTION_QUIT) 
     	{
     		studentMenuOptions();
             int choice = Helper.readInt("Enter an option > ");
@@ -132,7 +138,7 @@ public class CourseMain {
                 
             case 2:
                 System.out.println("Returning to main menu...");
-                option = -1;
+                option = OPTION_QUIT;
         
             default:
                 System.out.println("Invalid option. Please try again.");

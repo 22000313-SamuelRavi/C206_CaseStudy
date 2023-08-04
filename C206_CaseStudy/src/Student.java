@@ -44,12 +44,6 @@ public class Student {
 	@Override
 	public String toString() {
 		return "Student ID: " + studentID + ", Name: " + name + ", Age: " + age;
-	}
-
-	public void display() {
-		System.out.println("");
-		System.out.println(String.format("%-20s: %s ", "Student ID", studentID));
-		System.out.println(String.format("%-20s: %s ", "Student Name", name));
-		System.out.println(String.format("%-20s: %d ", "Age", age));
+	
 	}
 }
