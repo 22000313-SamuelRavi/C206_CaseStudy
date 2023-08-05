@@ -10,9 +10,6 @@ public class Student extends StudentList{
 		// Initialize other properties as needed
 	}
 
-	// Getters and setters for studentID, name, age, and other properties (if
-	// needed)
-
 	public int getAge() {
 		return age;
 	}
