@@ -3,6 +3,12 @@ public class C206_CaseStudy {
 	
 	public static void main(String[] args){
 		
+		Helper.line(70,"=");
+		System.out.println("******************** TUITION MANAGEMENT SYSTEM  **********************");
+		Helper.line(70,"=");
+		
+		System.out.println();
+		
 		String user = Helper.readString("What user are you? (Student, Teacher, Admin): ");
 		
 		if(user.equalsIgnoreCase("admin")) {
@@ -11,6 +17,12 @@ public class C206_CaseStudy {
 	} //End of main method
 	
 	public static void adminMenu() {
+		Helper.line(70,"-");
+		System.out.println("******************** MANAGEMENT SERVICES  ****************************");
+		Helper.line(70,"-");
+		
+		System.out.println();
+		
 		System.out.println("1. Course Management");
 		System.out.println("2. Fee Management");
 		System.out.println("3. User Management");
@@ -22,14 +34,17 @@ public class C206_CaseStudy {
 	private static void adminPage() {
 		String username = Helper.readString("Enter Username: ");
 		String password = Helper.readString("Enter Password: ");
-		
+		System.out.println();
 			// Create for loop to check if correct
 			if(username.equals("bob") && password.equals("1")) {
 
 				int option = 0;
 				while(option != 6) {
 					adminMenu();
-					option = Helper.readInt("Enter optoion: ");
+					
+					System.out.println();
+					
+					option = Helper.readInt("Enter option: ");
 					
 					if(option == 1) {
 		

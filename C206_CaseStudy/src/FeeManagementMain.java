@@ -18,6 +18,9 @@ public class FeeManagementMain {
 		
 		while(option != 5) {
 			menu();
+			
+			System.out.println();
+			
 			option = Helper.readInt("Enter option: ");
 			
 			if(option == 1) {
@@ -30,24 +33,38 @@ public class FeeManagementMain {
 	} //end of feeManagementPage method
 	
 	public static void menu() {
+		System.out.println();
+		
 		Helper.line(40, "=");
     	System.out.println("*** WELCOME TO FEE MANAGEMENT ***");
     	Helper.line(40, "=");
     	
+    	System.out.println();
     	System.out.println("1. View all Fees");
     	System.out.println("2. Add Fees");
     	System.out.println("3. Edit existing Fees");
     	System.out.println("4. Delete exisisting Fees");
     	System.out.println("5. Quit");
+    	System.out.println();
 	}
 	
+	
 	private static void viewAllFees(ArrayList <FeeManagement> studentFeeList) {
+		
+		System.out.println();
+		Helper.line(70,"=");
+		System.out.println("*********************  VIEW ALL FEES  **************************");
+		Helper.line(70,"=");
+		
+		System.out.println();
 		
 		DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		
 		String output = String.format("%-15s %-15s %-15s %s\n", "STUDENT ID", "FEE TYPE", "DUE DATE", "FEE AMOUNT");
+		
+		
 		for(FeeManagement f : studentFeeList) {
-			output += String.format("%-15s %-15s %-15s %-15f\n", f.getStudentId(), f.getFeeType(), f.getFeeDueDate().format(formattedDate), f.getFeeAmount());
+			output += String.format("%-15s %-15s %-15s %-15.2f\n", f.getStudentId(), f.getFeeType(), f.getFeeDueDate().format(formattedDate), f.getFeeAmount());
 		}
 		
 		System.out.println(output);
@@ -89,5 +106,6 @@ public class FeeManagementMain {
 	    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	    LocalDate date = LocalDate.parse(userInput, dateFormat);
 	    return date;
-	} //End of readDate method
+	  //End of readDate method
+	} 
 }
