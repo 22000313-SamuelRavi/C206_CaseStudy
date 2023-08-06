@@ -69,7 +69,7 @@ public class C206_CaseStudyTest {
 
 		String allStudent = StudentManagement.retrieveAllStudent(studentList);
 		String testOutput = "";
-		assertEquals("Check that ViewAllStudentlist", testOutput, allStudent);
+		assertEquals("Check that ViewAllStudentlist is correct", testOutput, allStudent);
 
 		StudentManagement.addStudent(studentList, student1);
 		StudentManagement.addStudent(studentList, student2);
@@ -79,15 +79,15 @@ public class C206_CaseStudyTest {
 		testOutput = String.format("%-15s %-15s %-15s\n", "22021234", "Alice", "19");
 		testOutput += String.format("%-15s %-15s %-15s\n", "22025678", "Bob", "21");
 
-		assertEquals("Test that ViewAllStudentlist", testOutput, allStudent);
+		assertEquals("Test that ViewAllStudentlist is correct", testOutput, allStudent);
 
 	}
 
 	@Test
 	public void testAddStudent() {
 		assertNotNull("Check if there is valid Student arraylist to add to", studentList);
+		
 		StudentManagement.addStudent(studentList, student1);
-
 		assertEquals("Check that Student arraylist size is 1", 1, studentList.size());
 		assertSame("Check that Student is added", student1, studentList.get(0));
 
