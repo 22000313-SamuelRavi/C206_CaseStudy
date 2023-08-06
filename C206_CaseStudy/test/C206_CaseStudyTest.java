@@ -63,7 +63,7 @@ public class C206_CaseStudyTest {
 	}
 
 	// ================================= student management  ================================================
-/*	@Test
+	@Test
 	public void testRetrieveAllStudent() {
 		assertNotNull("Test if there is valid Student arraylist to retrieve item", studentList);
 
@@ -99,23 +99,33 @@ public class C206_CaseStudyTest {
 	
 	@Test
 	public void testDoDeleteStudent() {
-		// Verify that the testStudentList has two students
-        assertEquals("Check that StudentList size is 2", 2, studentList.size());
+	    // Check if there is a valid Student ArrayList to retrieve items
+	    assertNotNull("Test if there is a valid Student ArrayList to retrieve items", studentList);
 
-        // Delete a student and check if the list size is reduced by one
-        Boolean isDeleted = StudentManagement.doDeleteStudent(studentList, student1);
-        assertEquals("Check that testStudentList size is 1 after deleting a student", 1, studentList.size());
+	    // Add students to the studentList
+	    StudentManagement.addStudent(studentList, student1);
+	    StudentManagement.addStudent(studentList, student2);
 
-        // Verify that the correct student has been deleted
-        assertSame("Check that the correct student is deleted", student2, studentList.get(0));
+	    // Test that the Student ArrayList size is 2
+	    assertEquals("Test that the Student ArrayList size is 2", 2, studentList.size());
 
-        // Attempt to delete a student that doesn't exist and verify the list size remains the same
-        Student nonExistingStudent = new Student("12345678", "NonExisting", 20);
-        StudentManagement.deleteStudent(studentList, nonExistingStudent);
-        assertEquals("Check that StudentList size is still 1 after attempting to delete a non-existing student", 1, studentList.size());
+	    // Test if the correct student is deleted
+	    boolean isDeleted = StudentManagement.doDeleteStudent(studentList, student1.getStudentID());
+	    assertTrue("Check that the correct student is deleted", isDeleted);
+
+	    // Test that the Student ArrayList size is reduced by one after deletion
+	    assertEquals("Test that the Student ArrayList size is 1 after deletion", 1, studentList.size());
+
+	    // Test that the deleted student is no longer in the list
+	    assertFalse("Check that the deleted student is no longer in the list", studentList.contains(student1));
+
+	    // Test if the deleteStudent method handles non-existing student IDs correctly
+	    boolean nonExistingDelete = StudentManagement.doDeleteStudent(studentList, "12345678");
+	    assertFalse("Check that non-existing student ID returns false", nonExistingDelete);
+	    assertEquals("Test that the Student ArrayList size remains 1 after attempting to delete a non-existing student", 1, studentList.size());
+
 	}
 	// =========================================================================================================
-	*/
 	@After
 	public void tearDown() throws Exception {
 		student1 = null;
