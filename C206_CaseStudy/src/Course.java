@@ -14,7 +14,6 @@ public class Course
 	private String courseID;
 	private String title;
 	private String schedule;
-	private List<Student> enrolledStudents;
 	private String teacher;
 	
 	public Course(String courseID, String title, String teacher, String schedule) 
@@ -23,7 +22,6 @@ public class Course
 		this.title = title;
 		this.teacher = teacher;
 		this.schedule = schedule;
-		this.enrolledStudents = new ArrayList<>();
 	}
 	
 	public String getCourseID() 
@@ -87,24 +85,5 @@ public class Course
 		System.out.println("Title: "+ title);
 		System.out.println("Teacher: "+ teacher);
 		System.out.println("Schedule: " + schedule);
-	}
-	
-	
-	// CHANGE THIS, add to specific course
-	
-	// Method to enroll a student in the course
-    public void enrollStudent(Student student) 
-    {
-        enrolledStudents.add(student);
-    }
-
-    //CHANGE THIS, add to specific course
-    
-    // Method to assign a teacher to the course
-    public void assignTeacher(String assignedTeacher) 
-    {
-        this.teacher = assignedTeacher;
-    }
-    
-    
+	}    
 }

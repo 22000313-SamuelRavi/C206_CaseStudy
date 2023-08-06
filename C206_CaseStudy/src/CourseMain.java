@@ -1,34 +1,50 @@
 import java.util.ArrayList;
 
-public class CourseMain {
+public class CourseMain 
+{
     private static final int OPTION_QUIT = 4;
 	private static final int OPTION_DELETE = 3;
 	private static final int OPTION_VIEW = 2;
 	private static final int OPTION_ADD = 1;
 
-	public static void coursePage() {
+	public static void coursePage() 
+	{
         // TODO Auto-generated method stub
         ArrayList<Course> courseList = new ArrayList<Course>();
-        courseList.add(new Course("C206", "Software Development Process", "Serene Yong", "Thursday"));
+        courseList.add(new Course("C206", "Software Development Process", "Serene Yong", "Thursday"));	
         courseList.add(new Course("C209", "Advanced Object-Oriented Programming", "Yeo Koon Huat", "Friday"));
         courseList.add(new Course("C236", "Web Application Development in .Net", "Hew Ka Kian", "Monday"));
         courseList.add(new Course("C328", "Intelligent Networks", "Ivan Wee", "Wednesday"));
         courseList.add(new Course("C327", "Internet Server Technologies", "Sharmila Kanna", "Tuesday"));
 
         int option = 0;
-        while (option != OPTION_QUIT) {
+        while (option != OPTION_QUIT) 
+        {
             menu();
             int choice = Helper.readInt("Enter an option > ");
-            if (choice == OPTION_ADD) {
-                addCourse(courseList);
-            } else if (choice == OPTION_VIEW) {
+            
+            if (choice == OPTION_ADD) 
+            {
+            	Course inputCourse = CourseMain.inputCourse();
+            	CourseMain.addCourse(courseList, inputCourse);
+                System.out.println("Course successfully added!");
+            } 
+            else if (choice == OPTION_VIEW) 
+            {
                 viewCourse(courseList);
-            } else if (choice == OPTION_DELETE) {
-                deleteCourse(courseList);
-            } else if (choice == OPTION_QUIT) {
+            } 
+            else if (choice == OPTION_DELETE) 
+            {
+            	String courseCodeToDelete = Helper.readString("Enter the course code to delete > ");
+                deleteCourse(courseList, courseCodeToDelete);
+            } 
+            else if (choice == OPTION_QUIT) 
+            {
                 System.out.println("Thank you for using Tuition Management System.");
                 option = OPTION_QUIT;
-            } else {
+            } 
+            else 
+            {
                 System.out.println("Invalid option. Please try again.");
             }
         }
@@ -45,116 +61,82 @@ public class CourseMain {
         System.out.println("4. Quit\n");
     }
 
-    public static void viewCourse(ArrayList<Course> courseList) {
+    //View all course details
+    public static String viewCourse(ArrayList<Course> courseList) 
+    {
         String output = String.format("%-15s %-40s %-30s %-15s\n", "COURSE CODE", "TITLE", "INSTRUCTOR", "SCHEDULE");
        
-        for (Course course : courseList) {
-        	
-            output += String.format("%-15s %-40s %-30s %-15s\n", course.getCourseID(), course.getTitle(),
-                    course.getTeacher(), course.getSchedule());
-        }
-        System.out.println();
-        System.out.println(output);
-    }
-
-    public static void addCourse(ArrayList<Course> courseList) {
-        String code;
-        while (true) {
-            code = Helper.readString("Course Code > ");
-            boolean courseFound = false;
-            for (Course course : courseList) {
-                String courseID = course.getCourseID();
-				if (code.equalsIgnoreCase(courseID)) {
-                    System.out.println("Course with code " + code + " already exists.");
-                    courseFound = true;
-                    break;
-                }
-            }
-
-            if (!courseFound) {
-                break;
-            }
-        }
-
-        String title = Helper.readString("Course Title > ");
-        String teacher = Helper.readString("Teacher > ");
-        String schedule = Helper.readString("Schedule > ");
-
-        courseList.add(new Course(code, title, teacher, schedule));
-        System.out.println("Course added successfully!");
-    }
-
-    public static void deleteCourse(ArrayList<Course> courseList) {
-        String courseCode = Helper.readString("Enter course code > ");
-
-        for (int i = 0; i < courseList.size(); i++) {
-            Course course = courseList.get(i);
-            if (course.getCourseID().equalsIgnoreCase(courseCode)) {
-                courseList.remove(i);
-                System.out.println("Course with code " + courseCode + " has been deleted successfully!");
-                return;
-            }
-        }
-
-        System.out.println("Course with code " + courseCode + " not found.");
-    }
-    
-    public static void studentMenuOptions() 
-    {
-    	Helper.line(40, "=");
-    	System.out.println("*** STUDENT MENU ***");
-    	Helper.line(40, "=");
-    	System.out.println("1. View Enrolled Courses");
-        System.out.println("2. View Grades");
-        System.out.println("3. Return to Main Menu\n");
-    }
-    
-    public static void viewEnrolledCourses(ArrayList<Course> enrolledCourses) 
-    {
-        String output = String.format("%-15s %-40s %-30s %-15s\n", "COURSE CODE", "TITLE", "INSTRUCTOR", "SCHEDULE");
-        for (Course course : enrolledCourses) 
+        for (Course course : courseList) 
         {
             output += String.format("%-15s %-40s %-30s %-15s\n", course.getCourseID(), course.getTitle(),
                     course.getTeacher(), course.getSchedule());
         }
         System.out.println();
         System.out.println(output);
+		return output;
     }
-    
-    public static void studentMenu(ArrayList<Course> courseList) 
+
+    //Add a new course
+    public static void addCourse(ArrayList<Course> courseList, Course cc) 
     {
-    	int option = 0;
-    	while (option != OPTION_QUIT) 
+    	Course c;
+    	for(int i = 0; i < courseList.size(); i++) 
     	{
-    		studentMenuOptions();
-            int choice = Helper.readInt("Enter an option > ");
-            switch (choice) 
-            {
-            case 1:
-                ArrayList<Course> enrolledCourses = null;
-				viewEnrolledCourses(enrolledCourses);
-				// Assuming you have a list of enrolled courses for the student
-                break;
-                
-            case 2:
-                System.out.println("Returning to main menu...");
-                option = OPTION_QUIT;
-        
-            default:
-                System.out.println("Invalid option. Please try again.");
-            }
+    		c = courseList.get(i);
+    		if (c.getCourseID().equalsIgnoreCase(cc.getCourseID()) )
+    			return;
     	}
+    	if ((cc.getCourseID().isEmpty()) || (cc.getTitle().isEmpty()) ) 
+    	{
+			return;
+    	}
+    	courseList.add(cc);
     }
-    	
     
-    public static void viewAssignedCourses(ArrayList<Course> assignedCourses) {
-        String output = String.format("%-15s %-40s %-30s %-15s\n", "COURSE CODE", "TITLE", "INSTRUCTOR", "SCHEDULE");
-        for (Course course : assignedCourses) {
-            output += String.format("%-15s %-40s %-30s %-15s\n", course.getCourseID(), course.getTitle(),
-                    course.getTeacher(), course.getSchedule().toString());
+    // New method to input course details
+    public static Course inputCourse() 
+    {
+        String courseCode = Helper.readString("Enter course code > ");
+        String title = Helper.readString("Enter title > ");
+        String instructor = Helper.readString("Enter instructor > ");
+        String schedule = Helper.readString("Enter schedule > ");
+
+        return new Course(courseCode, title, instructor, schedule);
+    }
+
+ // Delete an existing course
+    public static void deleteCourse(ArrayList<Course> courseList, String courseCodeToDelete) 
+    {
+        for (int i = 0; i < courseList.size(); i++) 
+        {
+            Course course = courseList.get(i);
+            if (course.getCourseID().equalsIgnoreCase(courseCodeToDelete)) 
+            {
+                // Prompt for confirmation before deletion
+                System.out.println("Are you sure you want to delete the following course?");
+                System.out.println("Course Code: " + course.getCourseID());
+                System.out.println("Title: " + course.getTitle());
+                System.out.println("Instructor: " + course.getTeacher());
+                System.out.println("Schedule: " + course.getSchedule());
+
+                String confirm = Helper.readString("Deletion confirm (yes/no) > ");
+                if (confirm.equalsIgnoreCase("yes")) 
+                {
+                    courseList.remove(i);
+                    System.out.println("Course with code " + courseCodeToDelete + " has been deleted successfully!");
+                } 
+                else if (confirm.equalsIgnoreCase("no")) 
+                {
+                    System.out.println("Deletion canceled. Course with code " + courseCodeToDelete + " was not deleted.");
+                } 
+                else 
+                {
+                    System.out.println("Invalid input. Please enter 'yes' or 'no' for confirmation.");
+                }
+                return;
+            }
         }
-        System.out.println("\n" + output);
+        System.out.println("Course with code " + courseCodeToDelete + " not found.");
     }
-    	
-    
+
 }
