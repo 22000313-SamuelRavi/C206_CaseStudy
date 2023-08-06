@@ -91,8 +91,21 @@ public class C206_CaseStudyTest {
 	}
 	
 	@Test
-	public void testDeleteStudent() {
-		// not done
+	public void testDoDeleteStudent() {
+		// Verify that the testStudentList has two students
+        assertEquals("Check that StudentList size is 2", 2, studentList.size());
+
+        // Delete a student and check if the list size is reduced by one
+        Boolean isDeleted = StudentManagement.doDeleteStudent(studentList, student1);
+        assertEquals("Check that testStudentList size is 1 after deleting a student", 1, studentList.size());
+
+        // Verify that the correct student has been deleted
+        assertSame("Check that the correct student is deleted", student2, studentList.get(0));
+
+        // Attempt to delete a student that doesn't exist and verify the list size remains the same
+        Student nonExistingStudent = new Student("12345678", "NonExisting", 20);
+        StudentManagement.deleteStudent(studentList, nonExistingStudent);
+        assertEquals("Check that StudentList size is still 1 after attempting to delete a non-existing student", 1, studentList.size());
 	}
 	// =========================================================================================================
 	

@@ -28,10 +28,10 @@ public class StudentManagement {
 
 			if (option == OPTION_VIEW) {
 				StudentManagement.viewAllStudent(studentList);
-				
+
 			} else if (option == OPTION_ADD) {
 				StudentManagement.setHeader("ADD STUDENT");
-				
+
 				if (option == OPTION_ADD) {
 					Student s = inputStudent();
 					StudentManagement.addStudent(studentList, s);
@@ -42,13 +42,13 @@ public class StudentManagement {
 
 			} else if (option == OPTION_DELETE) {
 				StudentManagement.setHeader("DELETE STUDENT");
-				
+
 				if (option == OPTION_DELETE) {
-				StudentManagement.deleteStudent(studentList);
+					StudentManagement.deleteStudent(studentList);
 				} else {
 					System.out.println("Invalid type");
 				}
-				
+
 			} else if (option == OPTION_QUIT) {
 				System.out.println("Thank you for using Student Management!\n");
 			} else {
@@ -71,8 +71,11 @@ public class StudentManagement {
 		System.out.println(header);
 		Helper.line(80, "=");
 	}
+	
+	
 
-	// ================================= Option 1 View (CRUD - Read) =================================
+	// ================================= Option 1 View (CRUD - Read)
+	// =================================
 	public static String retrieveAllStudent(ArrayList<Student> studentList) {
 		String output = "";
 
@@ -91,7 +94,8 @@ public class StudentManagement {
 		System.out.println(output);
 	}
 
-	// ================================= Option 2 Add (CRUD - Add) =================================
+	// ================================= Option 2 Add (CRUD - Add)
+	// =================================
 	public static Student inputStudent() {
 		String id = Helper.readString("Enter student ID > ");
 		String name = Helper.readString("Enter student name > ");
@@ -110,44 +114,46 @@ public class StudentManagement {
 			if (StudentList.getStudentID().equalsIgnoreCase(s.getStudentID()))
 				return;
 		}
-			if ((s.getStudentID().isEmpty()) || (s.getName().isEmpty())) {
-				return;
+		if ((s.getStudentID().isEmpty()) || (s.getName().isEmpty())) {
+			return;
 
-			}
+		}
 		studentList.add(s);
 
 	}// end of addNewStudent
 
-	// ================================= Option 3 Loan (CURD- Delete) =================================
-	public static boolean deleteStudent(ArrayList<Student> studentList) {
+	// ================================= Option 3 Loan (CURD- Delete)
+	// =================================
+	public static boolean doDeleteStudent(ArrayList<Student> studentList, String s) {
+		boolean isDeleted = false;
 
-		boolean studentfound = false;
+		if (s.isEmpty()) {
+			return false;
+		}
 
-		String id = Helper.readString("Enter student ID to delete > ");
-		boolean invalidIDFound = true;
+		for (int i = 0; i < studentList.size(); i++) {
+			String studentID = studentList.get(i).getStudentID();
 
-		for (Student s : studentList) {
-
-			String studentID = s.getStudentID();
-			if (id.equalsIgnoreCase(studentID)) {
-				String sDelete = Helper.readString("Confirm deletion (y/n) > ");
-
-				if (sDelete.equals("y") || sDelete.equals("Y")) {
-					studentList.remove(s);
-					System.out.println("Student has been deleted.");
-				}
-
-				studentfound = true;
-				invalidIDFound = false;
+			if (s.equalsIgnoreCase(studentID)) {
+				studentList.remove(i);
+				isDeleted = true;
 				break;
 			}
 		}
 
-		if (invalidIDFound) {
-			System.out.println("Invalid student ID.");
-		}
+		return isDeleted;
+	}
 
-		return studentfound;
+	public static void deleteStudent(ArrayList<Student> studentList) {
+		StudentManagement.viewAllStudent(studentList);
+		String id = Helper.readString("Enter student ID to delete > ");
+		boolean isDelete = doDeleteStudent(studentList, id);
+
+		if (isDelete == false) {
+			System.out.println("Invalid student ID");
+		} else {
+			System.out.println("student " + id + " deleted.");
+		}
 
 	}
 
