@@ -32,15 +32,24 @@ public class FeeManagementMain {
 			option = Helper.readInt("Enter an option: ");
 			
 			if(option == OPTION_VIEW) {
+				
 				viewAllFees(studentFeeList);
+				
 			} else if(option == OPTION_ADD) {
+				
 				addFees(studentFeeList);
+				
 			} else if(option == OPTION_DELETE) { 
+				
 				deleteFee(studentFeeList);
+				
 			} else if (option == OPTION_QUIT) {
+				
                 System.out.println("Thank you for using Tuition Management System.");
                 option = OPTION_QUIT;
+                
             } else {
+            	
                 System.out.println("Invalid option. Please try again.");
             }
 			
@@ -64,7 +73,7 @@ public class FeeManagementMain {
 	}
 	
 	
-	private static void viewAllFees(ArrayList <FeeManagement> studentFeeList) {
+	public static void viewAllFees(ArrayList <FeeManagement> studentFeeList) {
 		
 		System.out.println();
 		Helper.line(64,"=");
@@ -77,15 +86,16 @@ public class FeeManagementMain {
 		
 		String output = "";
 	    
-		output = String.format("%-15s %-6s %-15s %-6s\n", "| STUDENT ID ", "| FEE TYPE ", "| DUE DATE ", "| FEE AMOUNT |") +
-	                    "-------------------------------------------------------\n";
+		output = String.format("%-10s %-20s %-10s %-15s \n", "|STUDENT ID |", "FEE TYPE  |", "DUE DATE |", "FEE AMOUNT    |");
 
-	    for (FeeManagement f : studentFeeList) {
-	        output += "| " + String.format("%-9s", f.getStudentId()) + " | " +
-	                String.format("%-9s", f.getFeeType()) + " | " +
-	                String.format("%-14s", f.getFeeDueDate().format(formattedDate)) + " | " +
-	                "$" + String.format("%-10.2f", f.getFeeAmount()) + " |\n";
-	    }
+		output += "-------------------------------------------------------\n";
+
+		for (FeeManagement f : studentFeeList) {
+		    output += "| " + String.format("%-9s", f.getStudentId()) + " | " +
+		            String.format("%-9s", f.getFeeType()) + " | " +
+		            String.format("%-14s", f.getFeeDueDate().format(formattedDate)) + " | " +
+		            "$" + String.format("%-10.2f", f.getFeeAmount()) + " |\n";
+		}
 		
 		System.out.println(output);
 		
@@ -99,7 +109,7 @@ public class FeeManagementMain {
 			for(FeeManagement f : studentFeeList) {
 				if(f.getStudentId().equals(filterStudentId)) {
 					output = String.format("%-15s %-15s %-15s %s\n", "STUDENT ID", "FEE TYPE", "DUE DATE", "FEE AMOUNT");
-					output += String.format("%-15s %-15s %-15s %-15f\n", f.getStudentId(), f.getFeeType(), f.getFeeDueDate().format(formattedDate), f.getFeeAmount());
+					output += String.format("%-15s %-15s %-15s %-15.2f\n", f.getStudentId(), f.getFeeType(), f.getFeeDueDate().format(formattedDate), f.getFeeAmount());
 					break;
 				}
 				
@@ -111,7 +121,7 @@ public class FeeManagementMain {
 		
 	} //End of viewAllFees method
 	
-	private static void addFees(ArrayList <FeeManagement> studentFeeList) {
+	public static void addFees(ArrayList <FeeManagement> studentFeeList) {
 		
 		System.out.println();
 		Helper.line(64,"=");
@@ -159,7 +169,7 @@ public class FeeManagementMain {
 	        studentFeeList.clear();
 	        studentFeeList.addAll(updatedList);
 	        System.out.println();
-	        System.out.println(sID + "'s fees have been deleted successfully!");
+	        System.out.println(sID + "'s fees has been deleted successfully!");
 	    } else {
 	        System.out.println(sID + " not found.");
 	    }
