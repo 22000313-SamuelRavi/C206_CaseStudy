@@ -215,35 +215,25 @@ public class C206_CaseStudyTest {
         assertNotNull("Test if there is a valid Course arraylist to delete from", courseList);
         assertEquals("Test that the Course arraylist size is 3.", 3, courseList.size());
 
-        CourseMain.deleteCourse(courseList, "C206");
+        boolean isDeleted = CourseMain.deleteCourse(courseList, cc1.getCourseID());
+        assertTrue("Test that the correct course is deleted", isDeleted);
         assertEquals("Test that the Course arraylist size is now 2 after deletion.", 2, courseList.size());
-        assertNull("Test that the deleted course C206 is no longer in the list.", findCourse(courseList, "C206"));
+        
+        assertFalse("Test that the deleted course is no longer in the list", courseList.contains(cc1));
 
         // Error Condition: Attempt to delete a non-existing course
+        
         CourseMain.deleteCourse(courseList, "C999"); // Non-existing course
+        boolean deleteNo = CourseMain.deleteCourse(courseList, "C999");
+        assertFalse("Test that non-existing course is not found and not deleted", deleteNo);
         assertEquals("Test that the Course arraylist size remains unchanged.", 2, courseList.size());
 
         // Boundary Condition: Delete all courses
-        CourseMain.deleteCourse(courseList, "C209");
-        CourseMain.deleteCourse(courseList, "C236");
+        CourseMain.deleteCourse(courseList, cc2.getCourseID());
+        CourseMain.deleteCourse(courseList, cc3.getCourseID());
 
         assertEquals("Test that the Course arraylist is empty after deleting all courses.", 0, courseList.size());
     }
-
-
-    // Helper method to find a course in the list based on course code
-    private Course findCourse(ArrayList<Course> courseList, String courseCode) 
-    {
-        for (Course course : courseList) 
-        {
-            if (course.getCourseID().equalsIgnoreCase(courseCode)) 
-            {
-                return course;
-            }
-        }
-        return null; // Course not found
-    }
-
 	
 	
 	

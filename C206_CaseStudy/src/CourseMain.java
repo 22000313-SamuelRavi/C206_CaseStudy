@@ -86,7 +86,8 @@ public class CourseMain {
 	}
 
 	// Delete an existing course
-	public static void deleteCourse(ArrayList<Course> courseList, String courseCodeToDelete) {
+	public static boolean deleteCourse(ArrayList<Course> courseList, String courseCodeToDelete) {
+		boolean isDeleted = false; 
 		for (int i = 0; i < courseList.size(); i++) {
 			Course course = courseList.get(i);
 			if (course.getCourseID().equalsIgnoreCase(courseCodeToDelete)) {
@@ -100,17 +101,20 @@ public class CourseMain {
 				String confirm = Helper.readString("Deletion confirm (yes/no) > ");
 				if (confirm.equalsIgnoreCase("yes")) {
 					courseList.remove(i);
+					isDeleted = true;
 					System.out.println("Course with code " + courseCodeToDelete + " has been deleted successfully!");
-				} else if (confirm.equalsIgnoreCase("no")) {
-					System.out
-							.println("Deletion canceled. Course with code " + courseCodeToDelete + " was not deleted.");
-				} else {
+				} 
+				else if (confirm.equalsIgnoreCase("no")) {
+					System.out.println("Deletion canceled. Course with code " + courseCodeToDelete + " was not deleted.");
+				} 
+				else {
 					System.out.println("Invalid input. Please enter 'yes' or 'no' for confirmation.");
 				}
-				return;
+				
 			}
 		}
-		System.out.println("Course with code " + courseCodeToDelete + " not found.");
+		
+		return isDeleted;
 	}
 
 }
