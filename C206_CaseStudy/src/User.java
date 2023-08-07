@@ -1,36 +1,37 @@
+//written by Shwetha
 public class User {
+    private String username;
+    private String password;
+    private String userType; 
 
-    private String userID;
-    private String name;
-
-    public User(String userID, String name) {
-        this.userID = userID;
-        this.name = name;
+    public User(String username, String password, String userType) {
+        this.username = username;
+        this.password = password;
+        this.userType = userType;
     }
 
-    public String getUserID() {
-        return userID;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    // Method to get the user type as a string
-    public String getUserType() {
-        return "User";
-    }
+	public String getUserType() {
+		return userType;
+	}
 
-    // Method to get user details as a string
-    public String getUserDetails() {
-        return "";
-    }
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
 }
