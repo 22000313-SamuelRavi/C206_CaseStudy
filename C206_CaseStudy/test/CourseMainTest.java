@@ -36,6 +36,7 @@ public class CourseMainTest
     	//The item just added is as same as the last item in the list
     	assertSame("Test that Course is added to the end of the list.", cc2, courseList.get(1));
     	
+    	//Error condition
     	// Add an item that already exists in the list
     	CourseMain.addCourse(courseList, cc2);
     	assertEquals("Test that the Course arraylist size is unchange.", 2, courseList.size());
@@ -49,12 +50,17 @@ public class CourseMainTest
     @Test
     public void testViewCourse() {
     	
+    	assertNotNull("Test if there is valid Course arraylist to retrieve the courses", courseList);
     	//Add the courses 
     	courseList.add(cc1);
         courseList.add(cc2);
         courseList.add(cc3);
         assertEquals("Test that the Course arraylist size is now 3.", 3, courseList.size());
         
+//        String allCourses = CourseMain.viewCourse(courseList);
+//        String testOutput = "";
+//		assertEquals("Test that viewing all the courses in the courseList is correct", testOutput, allCourses);
+
         // Normal Condition: Test viewing all existing courses in the courseList
         String expectedOutput = String.format("%-15s %-40s %-30s %-15s\n", "COURSE CODE", "TITLE", "INSTRUCTOR", "SCHEDULE");
         for (Course course : courseList) {
@@ -83,7 +89,7 @@ public class CourseMainTest
         assertNotNull("Test if there is a valid Course arraylist to delete from", courseList);
         assertEquals("Test that the Course arraylist size is 3.", 3, courseList.size());
 
-        CourseMain.deleteCourse(courseList, "C206");
+        CourseMain.deleteCourse(courseList, cc1.getCourseID());
         assertEquals("Test that the Course arraylist size is now 2 after deletion.", 2, courseList.size());
         assertNull("Test that the deleted course C206 is no longer in the list.", findCourse(courseList, "C206"));
 
