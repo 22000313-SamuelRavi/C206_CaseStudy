@@ -39,9 +39,9 @@ public class CourseMain {
 	}
 
 	public static void menu() {
-		Helper.line(40, "=");
-		System.out.println("*** WELCOME TO COURSE DETAILS ***");
-		Helper.line(40, "=");
+		Helper.line(36, "=");
+		System.out.println("*** WELCOME TO COURSE MANAGEMENT ***");
+		Helper.line(36, "=");
 		System.out.println("1. Add a new course");
 		System.out.println("2. View all courses");
 		System.out.println("3. Delete an existing course");
@@ -50,15 +50,19 @@ public class CourseMain {
 
 	// View all course details
 	public static String viewCourse(ArrayList<Course> courseList) {
-		String output = String.format("%-15s %-40s %-30s %-15s\n", "COURSE CODE", "TITLE", "INSTRUCTOR", "SCHEDULE");
+		Helper.line(103, "=");
+	    String output = "";
+	    System.out.println(String.format("| %-15s | %-40s | %-25s | %-10s | ", "COURSE CODE", "TITLE", "INSTRUCTOR", "SCHEDULE"));
+	    Helper.line(103, "=");
+	    for (Course course : courseList) 
+	    {
+	        output += String.format("| %-15s | %-40s | %-25s | %-10s |\n",
+	                          course.getCourseID(), course.getTitle(), course.getTeacher(), course.getSchedule());
+	    }
 
-		for (Course course : courseList) {
-			output += String.format("%-15s %-40s %-30s %-15s\n", course.getCourseID(), course.getTitle(),
-					course.getTeacher(), course.getSchedule());
-		}
-		System.out.println();
-		System.out.println(output);
-		return output;
+	    System.out.println(output);
+	    Helper.line(103, "=");
+	    return output;
 	}
 
 	// Add a new course

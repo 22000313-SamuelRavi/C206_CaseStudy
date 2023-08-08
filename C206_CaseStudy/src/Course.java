@@ -63,11 +63,10 @@ public class Course
 		this.schedule = schedule;
 	}
 	
-	public void displayCourse() 
+	public String toString()
 	{
-		System.out.println("Course Code:"+ courseID);
-		System.out.println("Title: "+ title);
-		System.out.println("Teacher: "+ teacher);
-		System.out.println("Schedule: " + schedule);
-	}    
+		String output = "";
+		// Write your codes here
+		return output;
+	}
 }
