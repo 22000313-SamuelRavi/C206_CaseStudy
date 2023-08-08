@@ -10,25 +10,31 @@ import org.junit.Test;
 
 
 public class C206_CaseStudyTest {
-	//prepare test data for fee management
+	//fee management test
 	private FeeManagement f1;
 	private FeeManagement f2;
 	private FeeManagement f3;
 	private FeeManagement f4;
 	private FeeManagement f5;
+	
+	private ArrayList<FeeManagement> studentFeeList;
+	
+	//StudentTest
 	private Student student1;
 	private Student student2;
+	
+	private ArrayList<Student> studentList;
 	
 	//CourseMainTest
 	private Course cc1;
 	private Course cc2;
 	private Course cc3;
+	
     private ArrayList<Course> courseList;
 
 
-	private ArrayList<FeeManagement> studentFeeList;
-	private ArrayList<Student> studentList;
-
+	
+	
 	public C206_CaseStudyTest() {
 		super();
 	}
@@ -46,7 +52,6 @@ public class C206_CaseStudyTest {
 
 		studentFeeList= new ArrayList<FeeManagement>();
 		
-		// im writing stuff
 		
 	// ================================= student management  =================================
 		student1 = new Student("22021234", "Alice", 19);
@@ -59,26 +64,48 @@ public class C206_CaseStudyTest {
         cc1 = new Course("C206", "Software Development Process", "Serene Yong", "Thursday");
         cc2 = new Course("C209", "Advanced Object-Oriented Programming", "Yeo Koon Huat", "Friday");
         cc3 = new Course("C236", "Web Application Development in .Net", "Hew Ka Kian", "Monday");
+        
         courseList = new ArrayList<>();
 		
 		
 		
 	}
     //================================= fee management  ===================================================
-	@Test
-	public void testAddFees() {
-
-		// Item list is not null and it is empty (Normal Condition)
-		assertNotNull("Test if there is valid student fee arraylist to add to", studentFeeList);
-		assertEquals("Test that the student fee arraylist is empty.", 0, studentFeeList.size());
-		
-		// Add an item (Normal Condition)
-		FeeManagementMain.addFees(studentFeeList,f1);
-		assertEquals("Test that the studentFeeList arraylist size is now 1.", 1, studentFeeList.size());
-		
-		
-	}
-
+    @Test
+    public void testAddFees() {
+    	
+      //----Test 1----- 
+      // Item list is not null and it is empty (boundary Condition)
+      assertNotNull("Test if there is valid student fee arraylist to add to", studentFeeList);
+      assertEquals("Test that the Student Fee arraylist is empty.", 0, studentFeeList.size());
+      
+      
+      //-----Test 2----
+      //Given an empty list, after adding 1 item, the size of the list is 1 (normal condition)
+      //The item just added is as same as the first item of the list
+      FeeManagementMain.addFees(studentFeeList, f1);
+      assertEquals("Check that Student Fee arraylist size is 1", 1, studentFeeList.size());
+      
+      // Add another item
+      FeeManagementMain.addFees(studentFeeList, f2);
+  	  assertEquals("Test that the Student Fee arraylist size is now 2.", 2, studentFeeList.size());
+  	
+  	  //The item just added is as same as the last item in the list
+      assertSame("Test that Fee is added to the end of the list.", f2, studentFeeList.get(1));
+  	  
+     //-----Test 3----- 
+     // Error condition: Add an item that already exists in the list 
+  	  FeeManagementMain.addFees(studentFeeList, f2);
+  	  assertEquals("Test that the Student Fee arraylist size is unchanged.", 2, studentFeeList.size());
+  	 // Add an item that has missing detail
+  	  FeeManagement fee_MD = new FeeManagement(5000, " ", LocalDate.of(2023, 9, 8), "22000313") ;
+  	  FeeManagementMain.addFees(studentFeeList,fee_MD );
+  	  assertEquals("Test that the Student Fee arraylist size is unchanged.", 2, studentFeeList.size());
+  	  
+    }
+    
+    
+    
 	// ================================= student management  ================================================
 	@Test
 	public void testRetrieveAllStudent() {
@@ -251,6 +278,12 @@ public class C206_CaseStudyTest {
         cc2 = null;
         cc3 = null;
         courseList = null;
+        
+        f1 = null;
+        f2 = null;
+        f3 = null;
+        f4 = null;
+        f5 = null;
 	}
 
 	
