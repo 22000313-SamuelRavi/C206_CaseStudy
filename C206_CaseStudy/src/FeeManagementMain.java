@@ -37,6 +37,11 @@ public class FeeManagementMain {
         viewAllFees(studentFeeList);
         
       } else if(option == OPTION_ADD) {
+    	
+       System.out.println();
+       Helper.line(64,"=");
+       System.out.println("*********************  ADD A NEW FEE  **************************");
+       Helper.line(64,"=");
         
         //adding fees
         FeeManagement f = inputFees();
@@ -122,28 +127,8 @@ for (FeeManagement f : studentFeeList) {
   //--------------------------------------------- Method to add fees ----------------------------------------------------------------------
   
   
-    public static FeeManagement inputFees() {
-      
-      
-      System.out.println();
-      Helper.line(64,"=");
-      System.out.println("*********************  ADD A NEW FEE  **************************");
-      Helper.line(64,"=");
-      
-      
-      String inputStudentId = Helper.readString("Enter Student ID: ");
-      String inputFeeType = Helper.readString("Enter Fee Type: ");
-      LocalDate inputDueDate = readDate(Helper.readString(("Enter due date: (example: 25/02/2023): ")));
-      Double inputFeeAmount = Helper.readDouble("Enter Fee Amount: ");
-      
-      
-      
-      return new FeeManagement(inputFeeAmount, inputFeeType, inputDueDate, inputStudentId);
-      
-    }
-    
-    public static void addFees(ArrayList <FeeManagement> studentFeeList, FeeManagement f ){
-    
+  public static void addFees(ArrayList <FeeManagement> studentFeeList, FeeManagement f ){
+	    
       FeeManagement fm;
       
       for(int i = 0; i < studentFeeList.size(); i++) {
@@ -159,8 +144,20 @@ for (FeeManagement f : studentFeeList) {
       
       studentFeeList.add(f);
     } 
-    
   
+    public static FeeManagement inputFees() {
+    
+      String inputStudentId = Helper.readString("Enter Student ID: ");
+      String inputFeeType = Helper.readString("Enter Fee Type: ");
+      LocalDate inputDueDate = readDate(Helper.readString(("Enter due date: (example: 25/02/2023): ")));
+      Double inputFeeAmount = Helper.readDouble("Enter Fee Amount: ");
+      
+      
+      
+      return new FeeManagement(inputFeeAmount, inputFeeType, inputDueDate, inputStudentId);
+      
+    }
+    
   //------------------------------------------- checking date format --------------------------------------------------------------------------
   public static LocalDate readDate(String userInput) {
       DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
