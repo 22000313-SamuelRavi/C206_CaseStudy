@@ -90,7 +90,7 @@ public class FeeManagementMain {
   
   //--------------------------------------------- method to view fees ----------------------------------------------------------------
   
-  public static void viewAllFees(ArrayList <FeeManagement> studentFeeList) {
+  public static String viewAllFees(ArrayList <FeeManagement> studentFeeList) {
     
     System.out.println();
     Helper.line(64,"=");
@@ -103,40 +103,21 @@ public class FeeManagementMain {
     
     String output = "";
       
-    output = String.format("%-10s %-20s %-10s %-15s \n", "|STUDENT ID |", "FEE TYPE  |", "DUE DATE |", "FEE AMOUNT    |");
+    output = String.format("%-15s %-15s %-15s %-15s \n", "STUDENT ID ", "FEE TYPE  ", "DUE DATE ", "FEE AMOUNT   ");
 
-    output += "-------------------------------------------------------\n";
+   
 
 
 for (FeeManagement f : studentFeeList) {
-        output += "| " + String.format("%-9s", f.getStudentId()) + " | " +
-                String.format("%-9s", f.getFeeType()) + " | " +
-                String.format("%-14s", f.getFeeDueDate().format(formattedDate)) + " | " +
-                "$" + String.format("%-10.2f", f.getFeeAmount()) + " |\n";
+        output += "| " + String.format("%-15s", f.getStudentId()) + " | " +
+                String.format("%-15s", f.getFeeType()) + " | " +
+                String.format("%-15s", f.getFeeDueDate().format(formattedDate)) + " | " +
+                "$" + String.format("%-15.2f", f.getFeeAmount()) + " |\n";
     }
     
     System.out.println(output);
-    
-    String filterOption = Helper.readString("Do you want to filter? (yes/no): ");
-    
-    if(filterOption.equalsIgnoreCase("yes")) {
-      String filterStudentId = Helper.readString("Enter Student ID: ");
-    
-      output = "Invalid Student Id";
-    
-      for(FeeManagement f : studentFeeList) {
-        if(f.getStudentId().equals(filterStudentId)) {
-          output = String.format("%-15s %-15s %-15s %s\n", "STUDENT ID", "FEE TYPE", "DUE DATE", "FEE AMOUNT");
-          output += String.format("%-15s %-15s %-15s %-15.2f\n", f.getStudentId(), f.getFeeType(), f.getFeeDueDate().format(formattedDate), f.getFeeAmount());
-          break;
-        }
-        
-        System.out.println(output);
-        break;
-      }    
-      
-    }
-    
+	return output;
+  
   } 
   //--------------------------------------------- Method to add fees ----------------------------------------------------------------------
   
@@ -190,8 +171,8 @@ for (FeeManagement f : studentFeeList) {
   
   // --------------------------------------- Method to delete fees ----------------------------------------------------------------------------
   
-  public static void deleteFee(ArrayList<FeeManagement> studentFeeList, String deleteThisFee) {
-  
+  public static boolean deleteFee(ArrayList<FeeManagement> studentFeeList, String deleteThisFee) {
+	boolean isDeleted = false;
     for (int i = 0; i < studentFeeList.size(); i++) 
         {
           
@@ -203,6 +184,7 @@ for (FeeManagement f : studentFeeList) {
                 if (confirm.equalsIgnoreCase("Y")) 
                 {
                     studentFeeList.remove(i);
+                    isDeleted = true;
                     System.out.println("Student, " + deleteThisFee + "'s fee has been deleted successfully!");
                 } 
                 else if (confirm.equalsIgnoreCase("N")) 
@@ -213,12 +195,11 @@ for (FeeManagement f : studentFeeList) {
                 {
                     System.out.println("Invalid input. Please try again with 'Y' or 'N' !");
                 }
-                return;
+               
             }
         }
-        System.out.println("Student," + deleteThisFee + "'s fee does not exist.");
-    
-    
-  
+       
+		return isDeleted; 
+	
   }  
 }

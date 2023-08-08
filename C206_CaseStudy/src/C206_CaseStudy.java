@@ -1,4 +1,4 @@
-// Created by Samuel
+// Created by Priya
 public class C206_CaseStudy {
 	
 	public static void main(String[] args){
@@ -13,7 +13,16 @@ public class C206_CaseStudy {
 		
 		if(user.equalsIgnoreCase("admin")) {
 			adminPage();
-		} 
+		} else if(user.equalsIgnoreCase("student")) {
+			System.out.println("The Student menu is underdeveloped at the moment!");
+			
+		} else if(user.equalsIgnoreCase("teacher")) {
+			
+			System.out.println("The Teacher menu is underdeveloped at the moment!");
+			
+		} else {
+			System.out.println("Invalid input");
+		}
 	} //End of main method
 	
 	public static void adminMenu() {
