@@ -149,24 +149,24 @@ public class C206_CaseStudyTest {
 	@Test
     public void testAddCourse() 
     {
-    	// Course list is not null and it is empty
+    	// Boundary Condition: Course list is not null and it is empty
     	assertNotNull("Test if there is valid Course arraylist to add to", courseList);
     	assertEquals("Test that the Course arraylist is empty.", 0, courseList.size());
-    	//Given an empty list, after adding 1 item, the size of the list is 1
+    	
+    	
+    	// Normal Condition: Given an empty list, after adding 1 item, the size of the list is 1 
     	CourseMain.addCourse(courseList, cc1);		
     	assertEquals("Test that the Course arraylist size is 1.", 1, courseList.size());
-    	
-    	// Add an item
+    	// Add another item
     	CourseMain.addCourse(courseList, cc2);
     	assertEquals("Test that the Course arraylist size is now 2.", 2, courseList.size());
     	//The item just added is as same as the last item in the list
     	assertSame("Test that Course is added to the end of the list.", cc2, courseList.get(1));
     	
-    	//Error condition
-    	// Add an item that already exists in the list
+    	
+    	// Error condition: Add an item that already exists in the list 
     	CourseMain.addCourse(courseList, cc2);
     	assertEquals("Test that the Course arraylist size is unchange.", 2, courseList.size());
-
     	// Add an item that has missing detail
     	Course cc_missing = new Course("C110", "", "Andy", "Monday");
     	CourseMain.addCourse(courseList, cc_missing);
@@ -176,16 +176,15 @@ public class C206_CaseStudyTest {
     @Test
     public void testViewCourse() {
     	
-    	assertNotNull("Test if there is valid Course arraylist to retrieve the courses", courseList);
-    	//Add the courses 
+    	// Boundary Condition: Course list is not null and it is empty 
+    	assertNotNull("Test if there is valid Course arraylist to view the courses", courseList);
+    	
+    	// Add the courses 
     	courseList.add(cc1);
         courseList.add(cc2);
         courseList.add(cc3);
         assertEquals("Test that the Course arraylist size is now 3.", 3, courseList.size());
         
-//        String allCourses = CourseMain.viewCourse(courseList);
-//        String testOutput = "";
-//		assertEquals("Test that viewing all the courses in the courseList is correct", testOutput, allCourses);
 
         // Normal Condition: Test viewing all existing courses in the courseList
         String expectedOutput = String.format("%-15s %-40s %-30s %-15s\n", "COURSE CODE", "TITLE", "INSTRUCTOR", "SCHEDULE");
@@ -206,6 +205,9 @@ public class C206_CaseStudyTest {
     @Test
     public void testDeleteCourse() {
     	
+    	// Boundary Condition: Course list is not null and it is empty 
+    	assertNotNull("Test if there is valid Course arraylist to view the courses", courseList);
+    	
     	//Add the courses 
     	courseList.add(cc1);
         courseList.add(cc2);
@@ -218,7 +220,6 @@ public class C206_CaseStudyTest {
         boolean isDeleted = CourseMain.deleteCourse(courseList, cc1.getCourseID());
         assertTrue("Test that the correct course is deleted", isDeleted);
         assertEquals("Test that the Course arraylist size is now 2 after deletion.", 2, courseList.size());
-        
         assertFalse("Test that the deleted course is no longer in the list", courseList.contains(cc1));
 
         // Error Condition: Attempt to delete a non-existing course

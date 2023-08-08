@@ -26,6 +26,7 @@ public class CourseMainTest
     	// Course list is not null and it is empty
     	assertNotNull("Test if there is valid Course arraylist to add to", courseList);
     	assertEquals("Test that the Course arraylist is empty.", 0, courseList.size());
+    	
     	//Given an empty list, after adding 1 item, the size of the list is 1
     	CourseMain.addCourse(courseList, cc1);		
     	assertEquals("Test that the Course arraylist size is 1.", 1, courseList.size());
@@ -33,6 +34,7 @@ public class CourseMainTest
     	// Add an item
     	CourseMain.addCourse(courseList, cc2);
     	assertEquals("Test that the Course arraylist size is now 2.", 2, courseList.size());
+    	
     	//The item just added is as same as the last item in the list
     	assertSame("Test that Course is added to the end of the list.", cc2, courseList.get(1));
     	
