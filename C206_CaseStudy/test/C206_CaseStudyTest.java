@@ -46,6 +46,8 @@ public class C206_CaseStudyTest {
 
 		studentFeeList= new ArrayList<FeeManagement>();
 		
+		// im writing stuff
+		
 	// ================================= student management  =================================
 		student1 = new Student("22021234", "Alice", 19);
 		student2 = new Student("22025678", "Bob", 21);
