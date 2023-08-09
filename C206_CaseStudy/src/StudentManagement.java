@@ -35,9 +35,6 @@ public class StudentManagement {
 				if (option == OPTION_ADD) {
 					Student s = inputStudent();
 					StudentManagement.addStudent(studentList, s);
-					System.out.println("Student added");
-				} else {
-					System.out.println("Invalid type");
 				}
 
 			} else if (option == OPTION_DELETE) {
@@ -46,7 +43,7 @@ public class StudentManagement {
 				if (option == OPTION_DELETE) {
 					StudentManagement.deleteStudent(studentList);
 				} else {
-					System.out.println("Invalid type");
+					System.out.println("Invalid student ID");
 				}
 
 			} else if (option == OPTION_QUIT) {
@@ -71,8 +68,6 @@ public class StudentManagement {
 		System.out.println(header);
 		Helper.line(80, "=");
 	}
-	
-	
 
 	// ================================= Option 1 View (CRUD - Read)
 	// =================================
@@ -107,18 +102,20 @@ public class StudentManagement {
 	}
 
 	public static void addStudent(ArrayList<Student> studentList, Student s) {
-		Student StudentList;
-
-		for (int i = 0; i < studentList.size(); i++) {
-			StudentList = studentList.get(i);
-			if (StudentList.getStudentID().equalsIgnoreCase(s.getStudentID()))
+		for (Student existingStudent : studentList) {
+			if (existingStudent.getStudentID().equalsIgnoreCase(s.getStudentID())) {
+				System.out.println("Student ID already exists");
 				return;
+			}
 		}
-		if ((s.getStudentID().isEmpty()) || (s.getName().isEmpty())) {
-			return;
 
+		if (s.getStudentID().isEmpty() || s.getName().isEmpty() || s.getAge() <= 0) {
+			System.out.println("Invalid student information");
+			return;
 		}
+
 		studentList.add(s);
+		System.out.println("Student added");
 
 	}// end of addNewStudent
 
