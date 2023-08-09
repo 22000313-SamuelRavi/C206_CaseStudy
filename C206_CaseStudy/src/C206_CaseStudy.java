@@ -92,8 +92,7 @@ public class C206_CaseStudy {
                 } 
                 else if (option == 5) 
                 {
-                    // Enrolment Management
-                    // Add functionality here
+                    EnrolementManagementMain.EnrolementPage();
                 } 
                 else if (option == 6) 
                 {
