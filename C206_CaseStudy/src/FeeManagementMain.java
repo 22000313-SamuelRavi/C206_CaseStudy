@@ -1,4 +1,4 @@
-
+// created by priya
 import java.util.*;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -27,47 +27,62 @@ public class FeeManagementMain {
     
     while(option !=OPTION_QUIT ) {
       menu();
-      
-      System.out.println();
+     
       
       option = Helper.readInt("Enter an option: ");
+      
+      
       
       if(option == OPTION_VIEW) {
         
         viewAllFees(studentFeeList);
         
-      } else if(option == OPTION_ADD) {
+      } 
+      
+     else if(option == OPTION_ADD) {
     	
+    //header 	  
        System.out.println();
        Helper.line(64,"=");
        System.out.println("*********************  ADD A NEW FEE  **************************");
        Helper.line(64,"=");
         
-        //adding fees
-        FeeManagement f = inputFees();
-        FeeManagementMain.addFees(studentFeeList, f);
+     //adding fees
+       FeeManagement f = inputFees();
+       FeeManagementMain.addFees(studentFeeList,f);
+           System.out.println();
+           System.out.println("Fee added successfully!");
+      
+ 
+      } 
+      
+     else if(option == OPTION_DELETE) { 
         
+     //header
         System.out.println();
-        System.out.println("Fee added successfully!");
-        
-        
-      } else if(option == OPTION_DELETE) { 
-        
-          System.out.println();
-          Helper.line(64, "=");
-          System.out.println("********************* DELETE AN EXISTING FEE  ******************");
-          Helper.line(64, "=");
+        Helper.line(64, "=");
+        System.out.println("********************* DELETE AN EXISTING FEE  ******************");
+        Helper.line(64, "=");
           
-          System.out.println();
+        System.out.println();
         
         String deleteThisFee  = Helper.readString("Enter the Student ID to delete fees> ");
         
-        deleteFee(studentFeeList,deleteThisFee);
+        if (deleteFee(studentFeeList, deleteThisFee)) {
+        	
+            System.out.println("Fee deleted successfully!");
+            
+        } else {
+        	
+            System.out.println("Fee not deleted. Student ID not found.");
+        }
         
-      } else if (option == OPTION_QUIT) {
+      } 
+      
+      else if (option == OPTION_QUIT) {
         
-                System.out.println("Thank you for using Tuition Management System.");
-                option = OPTION_QUIT;
+        System.out.println("Thank you for using Tuition Management System.");
+        option = OPTION_QUIT;
                 
             } else {
               
@@ -79,10 +94,10 @@ public class FeeManagementMain {
   } //end of feeManagementPage method
   
   public static void menu() {
-    System.out.println();
+      System.out.println();
     
-    Helper.line(40, "=");
-      System.out.println("****** WELCOME TO FEE MANAGEMENT *******");
+      Helper.line(40, "=");
+      System.out.println("↠↠↠↠↠↠ WELCOME TO FEE MANAGEMENT ↞↞↞↞↞↞");
       Helper.line(40, "=");
       
       System.out.println();
@@ -95,56 +110,45 @@ public class FeeManagementMain {
   
   //--------------------------------------------- method to view fees ----------------------------------------------------------------
   
-  public static String viewAllFees(ArrayList <FeeManagement> studentFeeList) {
-    
-    System.out.println();
-    Helper.line(64,"=");
-    System.out.println("*********************  VIEW ALL FEES  **************************");
-    Helper.line(64,"=");
-    
-    System.out.println();
-    
-    DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    
-    String output = "";
-      
-    output = String.format("%-15s %-15s %-15s %-15s \n", "STUDENT ID ", "FEE TYPE  ", "DUE DATE ", "FEE AMOUNT   ");
+  public static String viewAllFees(ArrayList<FeeManagement> studentFeeList) {
+	    System.out.println();
+	    Helper.line(64, "=");
+	    System.out.println("*********************  VIEW ALL FEES  **************************");
+	    Helper.line(64, "=");
+	    System.out.println();
 
-   
+	    DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+	    System.out.println(String.format("| %-13s | %-9s | %-15s | %-7s | ", "STUDENT ID", "FEE TYPE", "DUE DATE", "AMOUNT"));
+	    Helper.line(57, "-");
 
-for (FeeManagement f : studentFeeList) {
-        output += "| " + String.format("%-15s", f.getStudentId()) + " | " +
-                String.format("%-15s", f.getFeeType()) + " | " +
-                String.format("%-15s", f.getFeeDueDate().format(formattedDate)) + " | " +
-                "$" + String.format("%-15.2f", f.getFeeAmount()) + " |\n";
-    }
-    
-    System.out.println(output);
-	return output;
-  
-  } 
+	    for (FeeManagement f : studentFeeList) {
+	        System.out.printf("| %-13s | %-9s | %-15s | %-7.2f |\n",
+	                f.getStudentId(), f.getFeeType(), f.getFeeDueDate().format(formattedDate), f.getFeeAmount());
+	    }
+		return null;
+	} 
   //--------------------------------------------- Method to add fees ----------------------------------------------------------------------
   
   
   public static void addFees(ArrayList <FeeManagement> studentFeeList, FeeManagement f ){
 	    
-      FeeManagement fm;
-      
-      for(int i = 0; i < studentFeeList.size(); i++) {
-        
-        fm = studentFeeList.get(i);
-        
-        if (fm.getStudentId().equalsIgnoreCase(f.getStudentId())) 
-          return;
-        }
-      if(f.getStudentId().isEmpty()){
-        return;  
-      }
+	  FeeManagement fm;
+
+      for (int i = 0; i < studentFeeList.size(); i++) {
+          fm = studentFeeList.get(i);
+
+          if (fm.getStudentId().equalsIgnoreCase(f.getStudentId())) {
+              return;
+          }
+          
+          
+          
       
       studentFeeList.add(f);
-    } 
-  
+   
+  }
+  }
     public static FeeManagement inputFees() {
     
       String inputStudentId = Helper.readString("Enter Student ID: ");
@@ -169,34 +173,30 @@ for (FeeManagement f : studentFeeList) {
   // --------------------------------------- Method to delete fees ----------------------------------------------------------------------------
   
   public static boolean deleteFee(ArrayList<FeeManagement> studentFeeList, String deleteThisFee) {
-	boolean isDeleted = false;
-    for (int i = 0; i < studentFeeList.size(); i++) 
-        {
-          
-            if (studentFeeList.get(i).getStudentId().equalsIgnoreCase(deleteThisFee)) 
-            {
+	  
+      for (int i = 0; i < studentFeeList.size(); i++) {
+    	  
+          if (studentFeeList.get(i).getStudentId().equalsIgnoreCase(deleteThisFee)) {
+        	  
+              String confirm = Helper.readString("Delete this Student's Fee? (Y/N) > ");
               
-                String confirm = Helper.readString("Delete this Student's Fee? (Y/N) > ");
-                
-                if (confirm.equalsIgnoreCase("Y")) 
-                {
-                    studentFeeList.remove(i);
-                    isDeleted = true;
-                    System.out.println("Student, " + deleteThisFee + "'s fee has been deleted successfully!");
-                } 
-                else if (confirm.equalsIgnoreCase("N")) 
-                {
-                    System.out.println("Student, " + deleteThisFee + "'s fee deletion failed.");
-                } 
-                else 
-                {
-                    System.out.println("Invalid input. Please try again with 'Y' or 'N' !");
-                }
-               
-            }
-        }
-       
-		return isDeleted; 
-	
-  }  
+              if (confirm.equalsIgnoreCase("Y")) {
+            	  
+                  studentFeeList.remove(i);
+                  System.out.println("Student, " + deleteThisFee + "'s fee has been deleted successfully!");
+                  return true;
+                  
+              } else if (confirm.equalsIgnoreCase("N")) {
+            	  
+                  System.out.println("Student, " + deleteThisFee + "'s fee deletion failed.");
+                  return true;
+                  
+              } else {
+                  System.out.println("Invalid input. Please try again with 'Y' or 'N' !");
+              }
+          }
+      }
+      return false;
+  }
+ 
 }
