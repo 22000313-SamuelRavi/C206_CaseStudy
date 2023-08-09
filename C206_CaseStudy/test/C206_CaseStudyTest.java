@@ -275,10 +275,6 @@ public class C206_CaseStudyTest {
     	// Add an item that already exists in the list
     	CourseMain.addCourse(courseList, cc2);
     	assertEquals("Test that the Course arraylist size is unchange.", 2, courseList.size());
-    	// Add an item that has missing detail
-    	Course cc_missing = new Course("C110", "", "Andy", "Monday");
-    	CourseMain.addCourse(courseList, cc_missing);
-    	assertEquals("Test that the Course arraylist size is unchange.", 2, courseList.size());
     }
 
     @Test

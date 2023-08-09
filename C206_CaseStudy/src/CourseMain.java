@@ -23,7 +23,6 @@ public class CourseMain {
 			if (choice == OPTION_ADD) {
 				Course inputCourse = CourseMain.inputCourse();
 				CourseMain.addCourse(courseList, inputCourse);
-				System.out.println("Course successfully added!");
 			} else if (choice == OPTION_VIEW) {
 				viewCourse(courseList);
 			} else if (choice == OPTION_DELETE) {
@@ -39,6 +38,7 @@ public class CourseMain {
 	}
 
 	public static void menu() {
+		System.out.println();
 		Helper.line(36, "=");
 		System.out.println("*** WELCOME TO COURSE MANAGEMENT ***");
 		Helper.line(36, "=");
@@ -66,27 +66,59 @@ public class CourseMain {
 	}
 
 	// Add a new course
-	public static void addCourse(ArrayList<Course> courseList, Course cc) {
-		Course c;
-		for (int i = 0; i < courseList.size(); i++) {
-			c = courseList.get(i);
-			if (c.getCourseID().equalsIgnoreCase(cc.getCourseID()))
-				return;
-		}
-		if ((cc.getCourseID().isEmpty()) || (cc.getTitle().isEmpty())) {
-			return;
-		}
-		courseList.add(cc);
+	public static void addCourse(ArrayList<Course> courseList, Course cc) 
+	{
+	    boolean courseExists = false;
+	    
+	    // Check if the course with the same courseID already exists
+	    for (Course existingCourse : courseList) 
+	    {
+	        if (existingCourse.getCourseID().equalsIgnoreCase(cc.getCourseID())) 
+	        {
+	            courseExists = true;
+	            break;
+	        }
+	    }
+	    
+	    if (courseExists) 
+	    {
+	        System.out.println("A course with the same course ID already exists in the list.");
+	        System.out.println("Please enter a new course.");
+	        
+//	        Course inputCourse = CourseMain.inputCourse();
+//			CourseMain.addCourse(courseList, inputCourse);
+	    } 
+	    else 
+	    {
+	        courseList.add(cc);
+	        System.out.println("Course successfully added!");
+	    }
 	}
 
-	// New method to input course details
-	public static Course inputCourse() {
-		String courseCode = Helper.readString("Enter course code > ");
-		String title = Helper.readString("Enter title > ");
-		String instructor = Helper.readString("Enter instructor > ");
-		String schedule = Helper.readString("Enter schedule > ");
 
-		return new Course(courseCode, title, instructor, schedule);
+	// New method to input course details
+	
+	public static Course inputCourse() 
+	{
+	    String courseCode = "";
+	    boolean validCourseCode = false;
+	    
+	    while (!validCourseCode) {
+	        courseCode = Helper.readString("Enter course code > ");
+	        if (courseCode.matches("^[A-Za-z]\\d{3}$")) {
+	            validCourseCode = true;
+	        } 
+	        else 
+	        {
+	            System.out.println("Invalid course code format!");
+	        }
+	    }
+	    
+	    String title = Helper.readString("Enter title > ");
+	    String instructor = Helper.readString("Enter instructor > ");
+	    String schedule = Helper.readString("Enter schedule > ");
+	    
+	    return new Course(courseCode, title, instructor, schedule);
 	}
 
 	// Delete an existing course
