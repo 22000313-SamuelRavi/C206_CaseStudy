@@ -123,13 +123,13 @@ public class C206_CaseStudyTest {
         // Normal Condition: Test viewing all existing fees in the studentFeeList
         DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
      
-        String actualOutput = String.format("%-10s %-20s %-10s %-15s \n", "STUDENT ID ", "FEE TYPE  ", "DUE DATE ", "FEE AMOUNT   ");
+        String actualOutput = String.format("%-15s %-15s %-15s %-15s \n", "STUDENT ID ", "FEE TYPE  ", "DUE DATE ", "FEE AMOUNT   ");
      
         for (FeeManagement f : studentFeeList) {
-        	actualOutput   +="| " + String.format("%-9s", f.getStudentId()) + " | " +
-                    String.format("%-9s", f.getFeeType()) + " | " +
-                    String.format("%-14s", f.getFeeDueDate().format(formattedDate)) + " | " +
-                    "$" + String.format("%-10.2f", f.getFeeAmount()) + " |\n";
+        	actualOutput   +="| " + String.format("%-15s", f.getStudentId()) + " | " +
+                    String.format("%-15s", f.getFeeType()) + " | " +
+                    String.format("%-15s", f.getFeeDueDate().format(formattedDate)) + " | " +
+                    "$" + String.format("%-15.2f", f.getFeeAmount()) + " |\n";
         }
         
         String allFees = FeeManagementMain.viewAllFees(studentFeeList);
@@ -137,7 +137,7 @@ public class C206_CaseStudyTest {
 
         // Boundary Condition: Test viewing all student fees when the list is empty
         ArrayList<FeeManagement> emptyStudentFeeList = new ArrayList<>();
-        String Output = String.format("%-10s %-20s %-10s %-15s \n", "STUDENT ID ", "FEE TYPE  ", "DUE DATE ", "FEE AMOUNT   ");
+        String Output = String.format("%-15s %-15s %-15s %-15s \n", "STUDENT ID ", "FEE TYPE  ", "DUE DATE ", "FEE AMOUNT   ");
         String emptyOutput = FeeManagementMain.viewAllFees(emptyStudentFeeList);
         assertEquals("Test that viewing all fees in an empty studentFeeList returns the appropriate message",Output , emptyOutput);
     }

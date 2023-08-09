@@ -9,15 +9,16 @@ public class C206_CaseStudy {
 		Helper.line(70,"=");
 		
 		System.out.println();
-		System.out.println("What user are you?");
-		Helper.line(18, "-");
+		Helper.line(23, "-");
+		System.out.println("✰ What user are you? ✰");
+		Helper.line(23, "-");
 		
 	    System.out.println("1. Administrator");
 	    System.out.println("2. Student");
 	    System.out.println("3. Teacher");
 		
 	    System.out.println();
-	    int user = Helper.readInt("Enter an option: ");
+	    int user = Helper.readInt("» Enter an option: ");
 		
 		if(user == 1) {
 			adminPage();
@@ -53,8 +54,10 @@ public class C206_CaseStudy {
 	} //End of adminMenu method
 	
 	private static void adminPage() {
-		String username = Helper.readString("Enter Username: ");
-		String password = Helper.readString("Enter Password: ");
+		
+		System.out.println();
+		String username = Helper.readString("✎ Enter Username: ");
+		String password = Helper.readString("✎ Enter Password: ");
 		System.out.println();
 			// Create for loop to check if correct
 			if(username.equals("bob") && password.equals("1")) {
@@ -65,7 +68,7 @@ public class C206_CaseStudy {
 					
 					System.out.println();
 					
-					option = Helper.readInt("Enter option: ");
+					option = Helper.readInt("» Enter option: ");
 					
 					if(option == 1) {
 		
@@ -77,15 +80,24 @@ public class C206_CaseStudy {
 						
 					} else if(option == 3) {
 						
+						UserManagement.userManagementPage();
+						
 					} else if(option == 4) {
 						
 						StudentManagement.studentManagementPage();
 						
 					} else if(option == 5) {
 						
+						System.out.println();
+						System.out.println("Reports are unable to be generated at the moment! ☹");
+						
 					} else if (option == 6) {
-						System.out.println("BYE BYE!");
+						
+						System.out.println();
+						System.out.println("Thank you for using our services! 😃");
+						
 					} else {
+						
 						System.out.println("Invalid Input!");
 					}
 				}
