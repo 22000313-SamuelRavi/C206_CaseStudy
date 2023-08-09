@@ -103,7 +103,8 @@ public class StudentManagement {
 
 	public static void addStudent(ArrayList<Student> studentList, Student s) {
 		for (Student existingStudent : studentList) {
-			if (existingStudent.getStudentID().equalsIgnoreCase(s.getStudentID())) {
+			String studentID = s.getStudentID();
+			if (existingStudent.getStudentID().equalsIgnoreCase(studentID)) {
 				System.out.println("Student ID already exists");
 				return;
 			}
