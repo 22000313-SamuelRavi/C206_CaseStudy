@@ -215,12 +215,16 @@ public class C206_CaseStudyTest {
 	// ================================= student management  ================================================
 	@Test
 	public void testRetrieveAllStudent() {
+		// Normal condition:
+		// Check if there is a valid Student ArrayList to retrieve items
 		assertNotNull("Test if there is valid Student arraylist to retrieve item", studentList);
 
 		String allStudent = StudentManagement.retrieveAllStudent(studentList);
 		String testOutput = "";
 		assertEquals("Check that ViewAllStudentlist is correct", testOutput, allStudent);
 
+		// Boundary condition:
+		// Added two student in the Student ArrayList and the size is 2
 		StudentManagement.addStudent(studentList, student1);
 		StudentManagement.addStudent(studentList, student2);
 		assertEquals("Test that Student arraylist size is 2", 2, studentList.size());
@@ -231,24 +235,44 @@ public class C206_CaseStudyTest {
 
 		assertEquals("Test that ViewAllStudentlist is correct", testOutput, allStudent);
 
+		// Error condition:
+		// Add an invalid student to the list and test if it handles the error
+	    Student invalidStudent = new Student("", "", -1); // Invalid student
+	    studentList.add(invalidStudent);
+
+	    allStudent = StudentManagement.retrieveAllStudent(studentList);
+	    testOutput += String.format("| %-15s | %-15s | %-15s |\n", "", "", -1); // Expected error output
+
+	    assertEquals("Test error condition: Invalid student information", testOutput, allStudent);
+		
 	}
 
 	@Test
 	public void testAddStudent() {
+		// Normal condition:
+		// Check if there is a valid Student ArrayList to retrieve items
 		assertNotNull("Check if there is valid Student arraylist to add to", studentList);
 		
+		// Test that the student is added inside Student ArrayList and size is 1 
 		StudentManagement.addStudent(studentList, student1);
 		assertEquals("Check that Student arraylist size is 1", 1, studentList.size());
 		assertSame("Check that Student is added", student1, studentList.get(0));
 
+		// Boundary condition:
+		// Test that two student is added inside Student ArrayList and size is 2
 		StudentManagement.addStudent(studentList, student2);
 		assertEquals("Check that Student arraylist size is 2", 2, studentList.size());
 		assertSame("Check that Studentis added", student2, studentList.get(1));
 
+		//Error condition:
+	    // Test if the addStudent method added the student ID already exist
+		StudentManagement.addStudent(studentList, student2);
+    	assertEquals("Test that the Student arraylist size is unchange.", 2, studentList.size());
 	}
 	
 	@Test
 	public void testDoDeleteStudent() {
+		// Normal condition:
 	    // Check if there is a valid Student ArrayList to retrieve items
 	    assertNotNull("Test if there is a valid Student ArrayList to retrieve items", studentList);
 
@@ -265,14 +289,23 @@ public class C206_CaseStudyTest {
 
 	    // Test that the Student ArrayList size is reduced by one after deletion
 	    assertEquals("Test that the Student ArrayList size is 1 after deletion", 1, studentList.size());
+	    
+	    // Boundary condition:
+	    //Test that the Student ArrayList size is 0
+	    StudentManagement.doDeleteStudent(studentList, student1.getStudentID());
+	    StudentManagement.doDeleteStudent(studentList, student2.getStudentID());
+
+	    //Test that the Student ArrayList size is reduced by two after deletion
+        assertEquals("Test that the Student arraylist is empty after deleting all student.", 0, studentList.size());
 
 	    // Test that the deleted student is no longer in the list
 	    assertFalse("Check that the deleted student is no longer in the list", studentList.contains(student1));
 
-	    // Test if the deleteStudent method handles non-existing student IDs correctly
-	    boolean nonExistingDelete = StudentManagement.doDeleteStudent(studentList, "12345678");
-	    assertFalse("Check that non-existing student ID returns false", nonExistingDelete);
-	    assertEquals("Test that the Student ArrayList size remains 1 after attempting to delete a non-existing student", 1, studentList.size());
+        // Error Condition:
+        // Attempt to delete a non-existing student
+	    boolean deleteStudent = StudentManagement.doDeleteStudent(studentList, "12345678"); // Non-existing student
+	    assertFalse("Test that non-existing student is not found in the list and not deleted", deleteStudent);
+	    assertEquals("Test that the Student arraylist size remains unchanged.", 0, studentList.size());
 
 	}
 	
@@ -379,17 +412,17 @@ public class C206_CaseStudyTest {
 	// ===================================== Enrollment Management =============================================
     
     @Test
-    private void testViewEnrol() {
+    public void testViewEnrol() {
     	
     }
     
     @Test
-    private void testAddEnrol() {
+    public void testAddEnrol() {
     	
     }
     
     @Test
-    private void testDeleteEnrol() {
+    public void testDeleteEnrol() {
     	
     }
     
