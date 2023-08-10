@@ -33,7 +33,15 @@ public class C206_CaseStudyTest {
 	private Course cc3;
 	
     private ArrayList<Course> courseList;
-
+    
+    //EnrolementManagementTest
+    private EnrolementManagement em1;
+    private EnrolementManagement em2;
+    private EnrolementManagement em3;
+    private EnrolementManagement em4;
+    private EnrolementManagement em5;
+    
+    private ArrayList<EnrolementManagement> enrolList;
     
 	public C206_CaseStudyTest() {
 		super();
@@ -67,7 +75,13 @@ public class C206_CaseStudyTest {
         
         courseList = new ArrayList<>();
 		
+    // =============================== enrolment management ==============================================
 		
+        em1 = new EnrolementManagement("22000313", "C206", 3.7);
+		em2 = new EnrolementManagement("22028492", "C209", 3.1);
+		em3 = new EnrolementManagement("22026533", "C236", 3.9);
+		em4 = new EnrolementManagement("22013820", "C328", 3.5);
+		em5 = new EnrolementManagement("22003342", "C327", 3.8);
 		
 	}
     //================================= fee management  ===================================================
@@ -346,7 +360,22 @@ public class C206_CaseStudyTest {
         assertEquals("Test that the Course arraylist is empty after deleting all courses.", 0, courseList.size());
     }
 
-	
+	// ===================================== Ernolment Management =============================================
+    
+    @Test
+    private void testViewEnrol() {
+    	
+    }
+    
+    @Test
+    private void testAddEnrol() {
+    	
+    }
+    
+    @Test
+    private void testDeleteEnrol() {
+    	
+    }
 	
 	// =========================================================================================================
 	@After
