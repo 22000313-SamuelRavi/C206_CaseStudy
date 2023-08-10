@@ -114,11 +114,31 @@ public class UserManagement {
         return removed;
     }
     public static User readUser() {
+    	while (true) {
     	String username = Helper.readString("Enter username > ");
     	String password = Helper.readString("Enter password > ");
-    	String userType = Helper.readString("Enter user type >");
-    	
-    	User newUser = new User(username, password, userType);
-    	return newUser;
+    	String userType = Helper.readString("Enter user type >");   	
+
+    	        // Perform validation checks on input fields
+    	        if (username.trim().isEmpty()) {
+    	            System.out.println("Error: Username field is missing. Please try again.");
+    	            continue;
+    	        }
+    	        if (password.trim().isEmpty()) {
+    	            System.out.println("Error: Password field is missing. Please try again.");
+    	            continue;
+    	        }
+    	        if (userType.trim().isEmpty()) {
+    	            System.out.println("Error: User type field is missing. Please try again.");
+    	            continue;
+    	        }
+
+    	        // Perform additional validation if needed, e.g., valid user types
+    	        
+    	        User newUser = new User(username, password, userType);
+    	        return newUser;
+    	    }
     	}
-    }
+
+
+   }
