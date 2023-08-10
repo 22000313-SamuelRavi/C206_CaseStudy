@@ -52,8 +52,8 @@ public class EnrolementManagementMainTest {
         		expectedOutput += String.format("| %-12s | %-8s | %.1f |\n", em.getStudentId(), em.getCourse(), em.getGpa());
         	}
        
-        String allUsers = EnrolementManagementMain.viewEnrol(enrolList);
-        assertEquals("Test that viewing all enrollments in the enrolList returns the expected output", expectedOutput, allUsers);	
+        String allEnrolments = EnrolementManagementMain.viewEnrol(enrolList);
+        assertEquals("Test that viewing all enrollments in the enrolList returns the expected output", expectedOutput, allEnrolments);	
     }
     
     @Test
@@ -105,8 +105,8 @@ public class EnrolementManagementMainTest {
         // Attempt to delete a non-existing enrollment
         
         // Non-existing enrollment
-        boolean deleteNo = EnrolementManagementMain.deleteEnrol(enrolList, "22000123");  
-        assertFalse("Test that non-existing enrollment is not found in the list and not deleted", deleteNo);
+        boolean isNotDeleted = EnrolementManagementMain.deleteEnrol(enrolList, "22000123");  
+        assertFalse("Test that non-existing enrollment is not found in the list and not deleted", isNotDeleted);
         assertEquals("Test that the EnrolementManagementMain arraylist size remains unchanged.", 4, enrolList.size());
 
         
