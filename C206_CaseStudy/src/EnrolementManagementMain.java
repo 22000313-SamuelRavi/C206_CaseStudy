@@ -8,6 +8,11 @@ public class EnrolementManagementMain {
 
 	private static final String idCheck = "22\\d{6}";
 	
+	private static final int OPTION_QUIT = 4;
+	private static final int OPTION_DELETE = 3;
+	private static final int OPTION_VIEW = 1;
+	private static final int OPTION_ADD = 2;
+	
 	public static void EnrolementPage() {
 		ArrayList<EnrolementManagement> enrolementList = new ArrayList<EnrolementManagement>();
 		
@@ -18,17 +23,22 @@ public class EnrolementManagementMain {
 		enrolementList.add(new EnrolementManagement("22003342", "C327", 3.8));
 		
 		int option = 0;
-		while(option != 4) {
+		while(option != OPTION_QUIT) {
 			menu();
 			option = Helper.readInt("Enter option> ");
 			
-			if(option == 1) {
-				viewEnrol(enrolementList);
-			} else if(option == 2) {
-				addEnrol(enrolementList);
-			} else if(option == 3) {
-				deleteEnrol(enrolementList);
-			} else if(option == 4) {
+			if(option == OPTION_VIEW) {
+				System.out.println(viewEnrol(enrolementList));
+			} else if(option == OPTION_ADD) {
+				EnrolementManagement newEnrol = inputEnrol(enrolementList);
+				addEnrol(enrolementList, newEnrol);
+			} else if(option == OPTION_DELETE) {
+				Helper.line(50, "=");
+				System.out.println("DELETE EXISTING ENROLEMENT");
+				Helper.line(50, "=");
+				String studentId = Helper.readString("Enter Student ID To Delete: ");
+				deleteEnrol(enrolementList, studentId);
+			} else if(option == OPTION_QUIT) {
 				System.out.println("Bye Bye!");
 			} else {
 				System.out.println("Invalid Input!");
@@ -48,7 +58,7 @@ public class EnrolementManagementMain {
 		System.out.println("4. Quit");
 	} //End of menu method
 
-	private static void viewEnrol(ArrayList<EnrolementManagement> enrolementList) {
+	public static String viewEnrol(ArrayList<EnrolementManagement> enrolementList) {
 		Helper.line(50, "=");
 		System.out.println("VIEW ALL ENROLEMENT");
 		Helper.line(50, "=");
@@ -59,14 +69,44 @@ public class EnrolementManagementMain {
 			output += String.format("| %-12s | %-8s | %.1f |\n", e.getStudentId(), e.getCourse(), e.getGpa());
 		}
 		
-		System.out.println(output);
+		return output;
 	} //End of viewEnrol method
 	
-	private static void addEnrol(ArrayList<EnrolementManagement> enrolementList) {
+	// =========== ADDING NEW ENROLLMENT ==========
+	
+	public static void addEnrol(ArrayList<EnrolementManagement> enrolementList, EnrolementManagement newEnrol) {
+		
+		boolean enrolExists = false;
+	    
+	    // Check if the course with the same courseID already exists
+	    for (EnrolementManagement existingEnrol : enrolementList) 
+	    {
+	        if (existingEnrol.getStudentId().equalsIgnoreCase(newEnrol.getStudentId())) 
+	        {
+	        	enrolExists = true;
+	            break;
+	        }
+	    }
+	    
+	    if (enrolExists) 
+	    {
+	        System.out.println("An enrollment with the same student ID already exists in the list.");
+	        System.out.println("Please enter a new enrollment.");
+	        
+	    } 
+	    else 
+	    {
+	        enrolementList.add(newEnrol);
+	        System.out.println("Enrollment successfully added!");
+	    }
+		
+	} //End of addEnrol method
+	
+	private static EnrolementManagement inputEnrol(ArrayList<EnrolementManagement> enrolementList) {
 		Helper.line(50, "=");
 		System.out.println("ADD NEW ENROLEMENT");
 		Helper.line(50, "=");
-		
+
 		boolean added = false;
 		while(added == false) {
 			String studentId = Helper.readString("Enter Student ID: ");
@@ -80,31 +120,29 @@ public class EnrolementManagementMain {
 				}
 				if(alreadyEnrolled == false) {
 					String course = Helper.readString("Enter Student's Course: ");
-
-					enrolementList.add(new EnrolementManagement(studentId, course, 0));
-					System.out.println("Student Enrolled");
 					added = true;
+					return (new EnrolementManagement(studentId, course, 0));
 				}
 			} else {
 				System.out.println("Student ID Not Valid!");
 			}
 		}
 		
-	} //End of addEnrol method
+		return null;
+		
+	} //End of inputEnrol method
 	
-	private static void deleteEnrol(ArrayList<EnrolementManagement> enrolementList) {
-		Helper.line(50, "=");
-		System.out.println("DELETE EXISTING ENROLEMENT");
-		Helper.line(50, "=");
+	// ==================== DELETE ENROLLMENT ====================
+	
+	public static boolean deleteEnrol(ArrayList<EnrolementManagement> enrolementList, String studentId) {
 		
 		boolean deleted = false;
 		while(deleted == false) {
-			String studentId = Helper.readString("Enter Student ID: ");
 			if(Pattern.matches(idCheck, studentId)) {
 				boolean studentFound = false;
 				for(EnrolementManagement e: enrolementList) {
 					if(e.getStudentId().equals(studentId)) {
-						String confirm = Helper.readString("Confirm Delete Student " + studentId + "? (y/n): ");
+						String confirm = Helper.readString("Confirm Delete Enrollment " + studentId + "? (y/n): ");
 						if(confirm.equalsIgnoreCase("y")) {
 							enrolementList.remove(e);
 							System.out.println("Student Enrolement Deleted");
@@ -125,8 +163,10 @@ public class EnrolementManagementMain {
 				}
 			} else {
 				System.out.println("Student ID Not Valid!");
+				break;
 			}
 		}
+		return deleted;
 	} //End of deleteEnrol method
 	
 	
