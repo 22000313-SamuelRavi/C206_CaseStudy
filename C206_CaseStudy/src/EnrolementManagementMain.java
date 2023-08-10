@@ -30,14 +30,9 @@ public class EnrolementManagementMain {
 			if(option == OPTION_VIEW) {
 				System.out.println(viewEnrol(enrolementList));
 			} else if(option == OPTION_ADD) {
-				EnrolementManagement newEnrol = inputEnrol(enrolementList);
-				addEnrol(enrolementList, newEnrol);
+				addMethod(enrolementList);
 			} else if(option == OPTION_DELETE) {
-				Helper.line(50, "=");
-				System.out.println("DELETE EXISTING ENROLEMENT");
-				Helper.line(50, "=");
-				String studentId = Helper.readString("Enter Student ID To Delete: ");
-				deleteEnrol(enrolementList, studentId);
+				deleteMethod(enrolementList);
 			} else if(option == OPTION_QUIT) {
 				System.out.println("Bye Bye!");
 			} else {
@@ -46,7 +41,7 @@ public class EnrolementManagementMain {
 		}
 
 	} //End of EnrolementPage method
-	
+
 	private static void menu() {
 		Helper.line(50, "=");
 		System.out.println("ENROLEMENT MANAGEMENT");
@@ -73,6 +68,11 @@ public class EnrolementManagementMain {
 	} //End of viewEnrol method
 	
 	// =========== ADDING NEW ENROLLMENT ==========
+	
+	private static void addMethod(ArrayList<EnrolementManagement> enrolementList) {
+		EnrolementManagement newEnrol = inputEnrol(enrolementList);
+		addEnrol(enrolementList, newEnrol);
+	} //End of addMethod method
 	
 	public static void addEnrol(ArrayList<EnrolementManagement> enrolementList, EnrolementManagement newEnrol) {
 		
@@ -168,6 +168,14 @@ public class EnrolementManagementMain {
 		}
 		return deleted;
 	} //End of deleteEnrol method
+	
+	private static void deleteMethod(ArrayList<EnrolementManagement> enrolementList) {
+		Helper.line(50, "=");
+		System.out.println("DELETE EXISTING ENROLEMENT");
+		Helper.line(50, "=");
+		String studentId = Helper.readString("Enter Student ID To Delete: ");
+		deleteEnrol(enrolementList, studentId);
+	} //End of deleteMethod method
 	
 	
 }
