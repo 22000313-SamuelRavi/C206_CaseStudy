@@ -7,7 +7,9 @@ public class StudentManagement {
 	private static final int OPTION_VIEW = 1;
 	private static final int OPTION_ADD = 2;
 	private static final int OPTION_DELETE = 3;
-	private static final int OPTION_QUIT = 4;
+	private static final int OPTION_UPDATE = 4;
+	private static final int OPTION_SEARCH = 5;
+	private static final int OPTION_QUIT = 6;
 
 	public static void studentManagementPage() {
 
@@ -31,23 +33,24 @@ public class StudentManagement {
 
 			} else if (option == OPTION_ADD) {
 				StudentManagement.setHeader("ADD STUDENT");
-
-				if (option == OPTION_ADD) {
-					Student s = inputStudent();
-					StudentManagement.addStudent(studentList, s);
-				}
+				Student s = inputStudent();
+				StudentManagement.addStudent(studentList, s);
 
 			} else if (option == OPTION_DELETE) {
 				StudentManagement.setHeader("DELETE STUDENT");
+				StudentManagement.deleteStudent(studentList);
 
-				if (option == OPTION_DELETE) {
-					StudentManagement.deleteStudent(studentList);
-				} else {
-					System.out.println("Invalid student ID");
-				}
+			} else if (option == OPTION_UPDATE) {
+				StudentManagement.setHeader("UPDATE STUDENT");
+				StudentManagement.updateStudent(studentList);
+
+			} else if (option == OPTION_SEARCH) {
+				StudentManagement.setHeader("SEARCH STUDENT");
+				StudentManagement.searchStudent(studentList);
 
 			} else if (option == OPTION_QUIT) {
 				System.out.println("Thank you for using Student Management!\n");
+
 			} else {
 				System.out.println("Invalid option selected");
 			}
@@ -59,7 +62,9 @@ public class StudentManagement {
 		System.out.println("1. View all student");
 		System.out.println("2. Add new student");
 		System.out.println("3. Delete student");
-		System.out.println("4. Quit");
+		System.out.println("4. Update student");
+		System.out.println("5. Search student");
+		System.out.println("6. Quit");
 		Helper.line(80, "-");
 	}// end of menu
 
@@ -69,7 +74,7 @@ public class StudentManagement {
 		Helper.line(55, "=");
 	}
 
-	// ================================= Option 1 View (CRUD - Read)
+	// ================================= Option 1 View
 	// =================================
 	public static String retrieveAllStudent(ArrayList<Student> studentList) {
 		String output = "";
@@ -91,7 +96,7 @@ public class StudentManagement {
 		System.out.println(output);
 	}
 
-	// ================================= Option 2 Add (CRUD - Add)
+	// ================================= Option 2 Add
 	// =================================
 	public static Student inputStudent() {
 		String id = Helper.readString("Enter student ID > ");
@@ -109,7 +114,7 @@ public class StudentManagement {
 			if (existingStudent.getStudentID().equalsIgnoreCase(studentID)) {
 				System.out.println("Student ID already exists");
 				return;
-			}	
+			}
 		}
 
 		if (s.getStudentID().isEmpty() || s.getName().isEmpty() || s.getAge() <= 0) {
@@ -122,7 +127,7 @@ public class StudentManagement {
 
 	}// end of addNewStudent
 
-	// ================================= Option 3 Loan (CURD- Delete)
+	// ================================= Option 3 Delete
 	// =================================
 	public static boolean doDeleteStudent(ArrayList<Student> studentList, String s) {
 		boolean isDeleted = false;
@@ -147,19 +152,64 @@ public class StudentManagement {
 	public static void deleteStudent(ArrayList<Student> studentList) {
 		StudentManagement.viewAllStudent(studentList);
 		String id = Helper.readString("Enter student ID to delete > ");
-	    boolean confirmDelete = Helper.readBoolean("Are you sure you want to delete student " + id + "? (yes/no) ");
-	    
-	    if (confirmDelete) {
-	        boolean isDelete = doDeleteStudent(studentList, id);
-	        if (!isDelete) {
-	            System.out.println("Invalid student ID");
-	        } else {
-	            System.out.println("Student " + id + " deleted.");
-	        }
-	    } else {
-	        System.out.println("Deletion canceled.");
-	    }
+		boolean confirmDelete = Helper.readBoolean("Are you sure you want to delete student " + id + "? (yes/no) ");
 
+		if (confirmDelete) {
+			boolean isDelete = doDeleteStudent(studentList, id);
+			if (!isDelete) {
+				System.out.println("Invalid student ID");
+			} else {
+				System.out.println("Student " + id + " deleted.");
+			}
+		} else {
+			System.out.println("Deletion canceled.");
+		}
+
+	}
+
+	// ================================= Option 4 Update
+	// =================================
+	public static void updateStudent(ArrayList<Student> studentList) {
+		StudentManagement.viewAllStudent(studentList);
+		String id = Helper.readString("Enter student ID to update > ");
+
+		for (Student student : studentList) {
+			if (student.getStudentID().equalsIgnoreCase(id)) {
+				String newName = Helper.readString("Enter new student name > ");
+				int newAge = Helper.readInt("Enter new student age > ");
+
+				student.setName(newName);
+				student.setAge(newAge);
+
+				System.out.println("Student details updated.");
+				return;
+			}
+		}
+
+		System.out.println("Student ID not found.");
+	}
+
+	// ================================= Option 6 Search
+	// =================================
+	public static void searchStudent(ArrayList<Student> studentList) {
+		String searchTerm = Helper.readString("Enter student ID or name to search > ");
+
+		boolean found = false;
+
+		for (Student student : studentList) {
+			if (student.getStudentID().equalsIgnoreCase(searchTerm) || student.getName().equalsIgnoreCase(searchTerm)) {
+				System.out.println("Student found:");
+				Helper.line(25, "=");
+				student.display();
+				Helper.line(25, "=");
+				found = true;
+				break;
+			}
+		}
+
+		if (!found) {
+			System.out.println("Student not found.");
+		}
 	}
 
 }// end of method
