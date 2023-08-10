@@ -141,13 +141,9 @@ public class FeeManagementMain {
           if (fm.getStudentId().equalsIgnoreCase(f.getStudentId())) {
               return;
           }
+      } 
           
-          
-          
-      
       studentFeeList.add(f);
-   
-  }
   }
     public static FeeManagement inputFees() {
     
