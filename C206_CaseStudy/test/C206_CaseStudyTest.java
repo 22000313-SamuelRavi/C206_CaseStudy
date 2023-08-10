@@ -196,8 +196,8 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that Student arraylist size is 2", 2, studentList.size());
 
 		allStudent = StudentManagement.retrieveAllStudent(studentList);
-		testOutput = String.format("%-15s %-15s %-15s\n", "22021234", "Alice", "19");
-		testOutput += String.format("%-15s %-15s %-15s\n", "22025678", "Bob", "21");
+		testOutput = String.format("| %-15s | %-15s | %-15s |\n", "22021234", "Alice", "19");
+		testOutput += String.format("| %-15s | %-15s | %-15s |\n", "22025678", "Bob", "21");
 
 		assertEquals("Test that ViewAllStudentlist is correct", testOutput, allStudent);
 
