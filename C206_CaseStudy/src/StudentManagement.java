@@ -147,13 +147,18 @@ public class StudentManagement {
 	public static void deleteStudent(ArrayList<Student> studentList) {
 		StudentManagement.viewAllStudent(studentList);
 		String id = Helper.readString("Enter student ID to delete > ");
-		boolean isDelete = doDeleteStudent(studentList, id);
-
-		if (isDelete == false) {
-			System.out.println("Invalid student ID");
-		} else {
-			System.out.println("student " + id + " deleted.");
-		}
+	    boolean confirmDelete = Helper.readBoolean("Are you sure you want to delete student " + id + "? (yes/no) ");
+	    
+	    if (confirmDelete) {
+	        boolean isDelete = doDeleteStudent(studentList, id);
+	        if (!isDelete) {
+	            System.out.println("Invalid student ID");
+	        } else {
+	            System.out.println("Student " + id + " deleted.");
+	        }
+	    } else {
+	        System.out.println("Deletion canceled.");
+	    }
 
 	}
 
