@@ -660,8 +660,6 @@ public class C206_CaseStudyTest {
         em3 = null;
         em4 = null;
         em5 = null;
-        
-    
 	}
 
 	
