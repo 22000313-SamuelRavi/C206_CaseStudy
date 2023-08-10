@@ -25,9 +25,15 @@ public class UserManagement {
             if (option == OPTION_VIEW) {
                 UserManagement.viewAllUsers(userList);
             } else if (option == OPTION_ADD) {
-                UserManagement.addUser();
+              Helper.line(80, "=");
+                 System.out.println("ADD NEW USER");
+                 Helper.line(80, "=");
+
+                 User inputUser = UserManagement.readUser();
+                UserManagement.addUser(userList, inputUser);
             } else if (option == OPTION_DELETE) {
-                UserManagement.deleteUser();
+             String userToRemove = Helper.readString("Enter the username of user to delete >");
+                UserManagement.deleteUser(userList, userToRemove);
             } else if (option == OPTION_QUIT) {
                 System.out.println("Thank you for using User Management!\n");
             } else {
@@ -47,30 +53,28 @@ public class UserManagement {
         Helper.line(80, "-");
     }
 
-    public static void viewAllUsers(ArrayList<User>userList) {
+    public static String viewAllUsers(ArrayList<User>userList) {
         Helper.line(80, "=");
         System.out.println("USER LIST");
         Helper.line(80, "=");
+        String output = "";
 
-        String output = String.format("%-20s %-10s %-10s\n", "USERNAME", "TYPE", "PASSWORD");
+         System.out.println(String.format("| %-15s | %-20s | %-25s\n", "USERNAME", "TYPE", "PASSWORD"));
         for (User user : userList) {
-            output += String.format("%-20s %-10s %-10s\n", user.getUsername(), user.getUserType(), user.getPassword());
+            output += String.format("| %-15s | %-20s | %-25s\n", user.getUsername(), user.getUserType(), user.getPassword());
         }
 
         System.out.println(output);
+  return output;
     }
 
-    public static void addUser() {
-        Helper.line(80, "=");
-        System.out.println("ADD NEW USER");
-        Helper.line(80, "=");
+    public static void addUser(ArrayList<User> userList, User user1) {
+   
+        userList.add(user1);
+        System.out.println("User added.");
+        
 
-        String username = Helper.readString("Enter username > ");
-        String password = Helper.readString("Enter password > ");
-        String userType = Helper.readString("Enter user type >");
-
-        User newUser = new User(username, password, userType);
-        userList.add(newUser);
+        
 
 //        if (userType.equalsIgnoreCase("STUDENT")) {
 //            studentList.add(newUser);
@@ -81,8 +85,9 @@ public class UserManagement {
         System.out.println("User added successfully!");
     }
 
-    public static void deleteUser() {
+    public static boolean deleteUser(ArrayList<User> userList, String string) {
         viewAllUsers(userList);
+        boolean removed = false;
         String usernameToDelete = Helper.readString("Enter the username to delete > ");
 
         User userToRemove = null;
@@ -95,20 +100,25 @@ public class UserManagement {
 
         if (userToRemove != null) {
             userList.remove(userToRemove);
-            if (userToRemove.getUserType().equalsIgnoreCase("STUDENT")) {
+            removed = true;
+            /*if (userToRemove.getUserType().equalsIgnoreCase("STUDENT")) {
                userList.remove(userToRemove);
             } else if (userToRemove.getUserType().equalsIgnoreCase("TEACHER")) {
                 userList.remove(userToRemove);
-            }
+            }*/
             System.out.println("User with username " + usernameToDelete + " has been deleted successfully!");
         } else {
-            System.out.println("User with username " + usernameToDelete + " not found.");
+            System.out.println("User with username " + usernameToDelete + " is not found!");
+            removed = false;
         }
+        return removed;
     }
-}
-
-//    public static String readUserRole() {
-//        Helper.line(80, "=");
-//        System.out.println("USER ROLES");
-//        Helper.line(80, "=");
-//        System.out.p
+    public static User readUser() {
+    	String username = Helper.readString("Enter username > ");
+    	String password = Helper.readString("Enter password > ");
+    	String userType = Helper.readString("Enter user type >");
+    	
+    	User newUser = new User(username, password, userType);
+    	return newUser;
+    	}
+    }

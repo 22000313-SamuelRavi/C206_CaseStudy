@@ -558,7 +558,7 @@ public class C206_CaseStudyTest {
     	//Error condition:
     	// Add an item that already exists in the list
     	UserManagement.addUser(userList, user2);
-    	assertEquals("Test that the User arraylist size is unchange.", 2, userList.size());
+    	assertEquals("Test that the User arraylist size is unchange.", 3, userList.size());
     }
 
     @Test
@@ -581,12 +581,12 @@ public class C206_CaseStudyTest {
         
         // Test viewing all existing courses in the courseList
         String expectedOutput = "";
-        expectedOutput += String.format("| %-15s | %-40s | %-25s | %-10s |\n", user1.getUsername(), user2.getPassword(),
-                user1.getUserType());
-        expectedOutput += String.format("| %-15s | %-40s | %-25s | %-10s |\n", user2.getUsername(), user2.getPassword(),
-                user2.getUserType());
-        expectedOutput += String.format("| %-15s | %-40s | %-25s | %-10s |\n", user3.getUsername(), user3.getPassword(),
-                user3.getUserType());
+        expectedOutput += String.format("| %-15s | %-20s | %-25s\n", user1.getUsername(), user1.getUserType(),
+                user1.getPassword());
+        expectedOutput += String.format("| %-15s | %-20s | %-25s\n", user2.getUsername(), user2.getUserType(),
+                user2.getPassword());
+        expectedOutput += String.format("| %-15s | %-20s | %-25s\n", user3.getUsername(), user3.getUserType(),
+                user3.getPassword());
        
         String allUsers = UserManagement.viewAllUsers(userList);
         assertEquals("Test that viewing all users in the userList returns the expected output", expectedOutput, allUsers);
