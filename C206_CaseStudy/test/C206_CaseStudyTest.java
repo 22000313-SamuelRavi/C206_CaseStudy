@@ -535,7 +535,8 @@ public class C206_CaseStudyTest {
     }
     
     //===================================User Management=======================================================
-	@Test
+	//Done by Shwetha
+    @Test
     public void testAddUser() 
     {
     	//Boundary condition:
