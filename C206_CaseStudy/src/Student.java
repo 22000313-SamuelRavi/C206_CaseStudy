@@ -23,7 +23,7 @@ public class Student extends StudentList{
 	@Override
 	public String toString() {
 		String output = super.toString();
-		output = String.format("%-31s %-15d", output, age);
+		output = String.format("| %-31s | %-15d |", output, age);
 		
 		return output;
 	}

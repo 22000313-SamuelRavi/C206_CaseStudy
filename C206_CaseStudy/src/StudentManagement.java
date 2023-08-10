@@ -17,7 +17,7 @@ public class StudentManagement {
 		studentList.add(new Student("22028492", "Bob", 18));
 		studentList.add(new Student("22026533", "Charlie", 19));
 		studentList.add(new Student("22013820", "David", 21));
-		studentList.add(new Student("22003342", "Ella", 20));
+		studentList.add(new Student("22003342", "Elsa", 20));
 
 		int option = 0;
 
@@ -64,9 +64,9 @@ public class StudentManagement {
 	}// end of menu
 
 	public static void setHeader(String header) {
-		Helper.line(80, "=");
+		Helper.line(55, "=");
 		System.out.println(header);
-		Helper.line(80, "=");
+		Helper.line(55, "=");
 	}
 
 	// ================================= Option 1 View (CRUD - Read)
@@ -83,8 +83,10 @@ public class StudentManagement {
 	}
 
 	public static void viewAllStudent(ArrayList<Student> studentList) {
-		StudentManagement.setHeader("STUDENT LIST");
-		String output = String.format("%-15s %-15s %-15s\n", "ID", "NAME", "AGE");
+		StudentManagement.setHeader("                    STUDENT LIST");
+		String output = "";
+		System.out.println(String.format("| %-15s | %-15s | %-15s |", "ID", "NAME", "AGE"));
+		Helper.line(55, "-");
 		output += retrieveAllStudent(studentList);
 		System.out.println(output);
 	}
@@ -107,7 +109,7 @@ public class StudentManagement {
 			if (existingStudent.getStudentID().equalsIgnoreCase(studentID)) {
 				System.out.println("Student ID already exists");
 				return;
-			}
+			}	
 		}
 
 		if (s.getStudentID().isEmpty() || s.getName().isEmpty() || s.getAge() <= 0) {
