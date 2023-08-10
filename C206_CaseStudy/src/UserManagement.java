@@ -1,4 +1,5 @@
 //written by Shwetha
+//fixed error
 import java.util.ArrayList;
 
 public class UserManagement {
@@ -8,14 +9,12 @@ public class UserManagement {
     private static final int OPTION_QUIT = 4;
 
     private static ArrayList<User> userList = new ArrayList<>();
-    private static ArrayList<User> studentList = new ArrayList<>();
-    private static ArrayList<User> teacherList = new ArrayList<>();
 
     public static void userManagementPage() {
         // Sample initial data
         userList.add(new User("admin", "admin123", "ADMIN"));
-        studentList.add(new User("student1", "student123", "STUDENT"));
-        teacherList.add(new User("teacher1", "teacher123", "TEACHER"));
+        userList.add(new User("student1", "student123", "STUDENT"));
+        userList.add(new User("teacher1", "teacher123", "TEACHER"));
 
         int option = 0;
 
@@ -24,7 +23,7 @@ public class UserManagement {
             option = Helper.readInt("Enter an option > ");
 
             if (option == OPTION_VIEW) {
-                UserManagement.viewAllUsers();
+                UserManagement.viewAllUsers(userList);
             } else if (option == OPTION_ADD) {
                 UserManagement.addUser();
             } else if (option == OPTION_DELETE) {
@@ -48,7 +47,7 @@ public class UserManagement {
         Helper.line(80, "-");
     }
 
-    public static void viewAllUsers() {
+    public static void viewAllUsers(ArrayList<User>userList) {
         Helper.line(80, "=");
         System.out.println("USER LIST");
         Helper.line(80, "=");
@@ -68,22 +67,22 @@ public class UserManagement {
 
         String username = Helper.readString("Enter username > ");
         String password = Helper.readString("Enter password > ");
-        String userType = readUserRole();
+        String userType = Helper.readString("Enter user type >");
 
         User newUser = new User(username, password, userType);
         userList.add(newUser);
 
-        if (userType.equalsIgnoreCase("STUDENT")) {
-            studentList.add(newUser);
-        } else if (userType.equalsIgnoreCase("TEACHER")) {
-            teacherList.add(newUser);
-        }
+//        if (userType.equalsIgnoreCase("STUDENT")) {
+//            studentList.add(newUser);
+//        } else if (userType.equalsIgnoreCase("TEACHER")) {
+//            teacherList.add(newUser);
+//        }
 
         System.out.println("User added successfully!");
     }
 
     public static void deleteUser() {
-        viewAllUsers();
+        viewAllUsers(userList);
         String usernameToDelete = Helper.readString("Enter the username to delete > ");
 
         User userToRemove = null;
@@ -97,32 +96,19 @@ public class UserManagement {
         if (userToRemove != null) {
             userList.remove(userToRemove);
             if (userToRemove.getUserType().equalsIgnoreCase("STUDENT")) {
-                studentList.remove(userToRemove);
+               userList.remove(userToRemove);
             } else if (userToRemove.getUserType().equalsIgnoreCase("TEACHER")) {
-                teacherList.remove(userToRemove);
+                userList.remove(userToRemove);
             }
             System.out.println("User with username " + usernameToDelete + " has been deleted successfully!");
         } else {
             System.out.println("User with username " + usernameToDelete + " not found.");
         }
     }
-
-    public static String readUserRole() {
-        Helper.line(80, "=");
-        System.out.println("USER ROLES");
-        Helper.line(80, "=");
-        System.out.println("1. Student");
-        System.out.println("2. Teacher");
-        int choice = Helper.readInt("Enter the user type number > ");
-        if (choice == 1) {
-            return "STUDENT";
-        } else if (choice == 2) {
-            return "TEACHER";
-        } else {
-            System.out.println("Invalid user type selected, setting as STUDENT by default.");
-            return "STUDENT";
-        }
-    }
-
- 
 }
+
+//    public static String readUserRole() {
+//        Helper.line(80, "=");
+//        System.out.println("USER ROLES");
+//        Helper.line(80, "=");
+//        System.out.p
