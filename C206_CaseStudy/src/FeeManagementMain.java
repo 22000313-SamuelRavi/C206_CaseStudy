@@ -1,3 +1,5 @@
+
+
 // created by priya
 import java.util.*;
 import java.time.*;
@@ -34,7 +36,12 @@ public class FeeManagementMain {
       
       
       if(option == OPTION_VIEW) {
-        
+    	  
+    	System.out.println();  
+    	Helper.line(64, "=");
+  	    System.out.println("*********************  VIEW ALL FEES  **************************");
+  	    Helper.line(64, "=");
+  	    System.out.println();
         viewAllFees(studentFeeList);
         
       } 
@@ -111,11 +118,9 @@ public class FeeManagementMain {
   //--------------------------------------------- method to view fees ----------------------------------------------------------------
   
   public static String viewAllFees(ArrayList<FeeManagement> studentFeeList) {
-	    System.out.println();
-	    Helper.line(64, "=");
-	    System.out.println("*********************  VIEW ALL FEES  **************************");
-	    Helper.line(64, "=");
-	    System.out.println();
+	
+	   
+	    String output = "";
 
 	    DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -123,10 +128,12 @@ public class FeeManagementMain {
 	    Helper.line(57, "-");
 
 	    for (FeeManagement f : studentFeeList) {
-	        System.out.printf("| %-13s | %-9s | %-15s | %-7.2f |\n",
+	        output += String.format("| %-13s | %-9s | %-15s | %-7.2f |\n",
 	                f.getStudentId(), f.getFeeType(), f.getFeeDueDate().format(formattedDate), f.getFeeAmount());
 	    }
-		return null;
+	    System.out.println(output);
+	    return output;
+		
 	} 
   //--------------------------------------------- Method to add fees ----------------------------------------------------------------------
   
