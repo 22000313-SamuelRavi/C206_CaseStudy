@@ -1,4 +1,4 @@
-// adminPage method updated by Khin
+// admin page done by team 5
 public class C206_CaseStudy {
 
 	public static void main(String[] args) {
