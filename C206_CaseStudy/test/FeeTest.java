@@ -77,28 +77,28 @@ public class FeeTest {
 	    @Test
 	    public void testViewAllFees() {
 	    	
+	    	//---------Test 1--------------
+	    	
 	    	//Boundary condition:
-	        assertNotNull("Test if there is a valid Student Fee arraylist to get and display the Student Fees", studentFeeList);
+	        assertNotNull("Test if there is a valid Student Fee arraylist to get and display the Student Fees", 
+	        		       studentFeeList);
 	        // Test viewing student fees when the list is empty
 	        String emptyOutput = FeeManagementMain.viewAllFees(studentFeeList);
 	        String expectedEmptyOutput = "";
 	        		
-	        assertEquals("Test that viewing all student fees in an empty Student Fee List returns the appropriate message",
-	                expectedEmptyOutput, emptyOutput);
+	        assertEquals("Test that viewing all student fees in an empty Student Fee List",expectedEmptyOutput, emptyOutput);
 
-	        
-	        //Normal condition:
+	      
+	    	//---------Test 2--------------
 	        
 	        // Add the fees
-	        
 	        studentFeeList.add(f1);
 	    	studentFeeList.add(f2);
 	    	studentFeeList.add(f3);
-	    
-	    	
-	        assertEquals("Test that the Student Fee arraylist size is now 3.", 3, studentFeeList.size());
+
+	        assertEquals("Test that the Student Fee arraylist size is now 3.",3, studentFeeList.size());
 	        
-	        // Test viewing all existing fees in the studentFeeList
+	        //Normal condition:  Test viewing all existing fees in the studentFeeList
 	        String expectedOutput = "";
 	        DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	        
@@ -108,11 +108,9 @@ public class FeeTest {
 	                f2.getStudentId(), f2.getFeeType(), f2.getFeeDueDate().format(formattedDate), f2.getFeeAmount());
 	        expectedOutput += String.format("| %-13s | %-9s | %-15s | %-7.2f |\n",
 	                f3.getStudentId(), f3.getFeeType(), f3.getFeeDueDate().format(formattedDate), f3.getFeeAmount());
-	        
-	        
+
 	        String allFees = FeeManagementMain.viewAllFees(studentFeeList);
-	        assertEquals("Test that viewing all fees in the Student Fee List returns the expected output", expectedOutput, allFees);
-	    
+	        assertEquals("Test that viewing all fees in the Student Fee List returns the expected output",expectedOutput, allFees);
 	    }
 	    
 	    
@@ -120,16 +118,17 @@ public class FeeTest {
 	    @Test
 	    public void testDeleteFee() {
 	    	
-	    	// Boundary Condition: Student Fee list is not null and it is empty 
+	    	//Student Fee list is not null and it is empty 
 	    	assertNotNull("Test if there is valid Student Fee arraylist to view the Student Fees", studentFeeList);
+	    	
+	    	//---------Test 1--------------
 	    	
 	    	// Add the student fees 
 	    	studentFeeList.add(f1);
 	    	studentFeeList.add(f2);
 	    	studentFeeList.add(f3);
-	    	
-	        
-	        // Normal Condition: Delete an existing course
+
+	        // Normal Condition: Delete existing student fees
 	        assertNotNull("Test if there is a valid Student Fee arraylist to delete from",studentFeeList );
 	        assertEquals("Test that the Student Fee arraylist size is 3.", 3, studentFeeList.size());
 
@@ -137,6 +136,8 @@ public class FeeTest {
 	        assertTrue("Test that the correct Student's fee is deleted", isDeleted);
 	        assertEquals("Test that the Student Fee arraylist size is now 2 after deletion.", 2, studentFeeList.size());
 	        assertFalse("Test that the deleted Student Fee is no longer in the list", studentFeeList.contains(f1));
+	        
+	      //---------Test 2--------------
 
 	        // Error Condition: Attempt to delete a Student Fee that does not exist in the list
 	        
@@ -144,19 +145,18 @@ public class FeeTest {
 	        boolean deleteNo = FeeManagementMain.deleteFee(studentFeeList, "22026534");
 	        assertFalse("Test that non-existing Student Fee is not found and not deleted", deleteNo);
 	        assertEquals("Test that the Student Fee arraylist size remains unchanged.", 2, studentFeeList.size());
+	        
+	      //---------Test 3--------------
 
 	        // Boundary Condition: Delete all Student Fees
 	       FeeManagementMain.deleteFee(studentFeeList, f2.getStudentId());
 	       FeeManagementMain.deleteFee(studentFeeList, f3.getStudentId());
-	      
-
-	        assertEquals("Test that the Student Fee arraylist is empty after deleting all fees.", 0, studentFeeList.size());
+	       assertEquals("Test that the Student Fee arraylist is empty after deleting all fees.", 0, studentFeeList.size());
+	       
 	    }
 	    @After
 		public void tearDown() throws Exception {
 			
-			
-	        
 	        // fee management
 	        // Done by Priya
 	        f1 = null;

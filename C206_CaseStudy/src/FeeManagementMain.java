@@ -1,5 +1,3 @@
-
-
 // created by priya
 import java.util.*;
 import java.time.*;
@@ -31,7 +29,7 @@ public class FeeManagementMain {
       menu();
      
       
-      option = Helper.readInt("Enter an option: ");
+      option = Helper.readInt("» Enter an option: ");
       
       
       
@@ -58,7 +56,7 @@ public class FeeManagementMain {
        FeeManagement f = inputFees();
        FeeManagementMain.addFees(studentFeeList,f);
            System.out.println();
-           System.out.println("Fee added successfully!");
+           System.out.println("Fee added successfully! ☺");
       
  
       } 
@@ -73,27 +71,27 @@ public class FeeManagementMain {
           
         System.out.println();
         
-        String deleteThisFee  = Helper.readString("Enter the Student ID to delete fees> ");
+        String deleteThisFee  = Helper.readString("» Enter the Student ID to delete fees> ");
         
         if (deleteFee(studentFeeList, deleteThisFee)) {
         	
-            System.out.println("Fee deleted successfully!");
+            System.out.println("Fee deleted successfully! ☺");
             
         } else {
         	
-            System.out.println("Fee not deleted. Student ID not found.");
+            System.out.println("Fee not deleted. Student ID not found. ☹");
         }
         
       } 
       
       else if (option == OPTION_QUIT) {
         
-        System.out.println("Thank you for using Tuition Management System.");
+        System.out.println("Thank you for using Tuition Management System. ☺");
         option = OPTION_QUIT;
                 
             } else {
               
-                System.out.println("Invalid option. Please try again.");
+                System.out.println("Invalid option. Please try again. ☹");
             }
       
     }
@@ -154,10 +152,10 @@ public class FeeManagementMain {
   }
     public static FeeManagement inputFees() {
     
-      String inputStudentId = Helper.readString("Enter Student ID: ");
-      String inputFeeType = Helper.readString("Enter Fee Type: ");
-      LocalDate inputDueDate = readDate(Helper.readString(("Enter due date: (example: 25/02/2023): ")));
-      Double inputFeeAmount = Helper.readDouble("Enter Fee Amount: ");
+      String inputStudentId = Helper.readString("» Enter Student ID: ");
+      String inputFeeType = Helper.readString("» Enter Fee Type: ");
+      LocalDate inputDueDate = readDate(Helper.readString(("» Enter due date: (example: 25/02/2023): ")));
+      Double inputFeeAmount = Helper.readDouble("» Enter Fee Amount: ");
       
       
       
@@ -181,21 +179,21 @@ public class FeeManagementMain {
     	  
           if (studentFeeList.get(i).getStudentId().equalsIgnoreCase(deleteThisFee)) {
         	  
-              String confirm = Helper.readString("Delete this Student's Fee? (Y/N) > ");
+              String confirm = Helper.readString("» Delete this Student's Fee? (Y/N) > ");
               
               if (confirm.equalsIgnoreCase("Y")) {
             	  
                   studentFeeList.remove(i);
-                  System.out.println("Student, " + deleteThisFee + "'s fee has been deleted successfully!");
+                  System.out.println("Student, " + deleteThisFee + "'s fee has been deleted successfully! ☺");
                   return true;
                   
               } else if (confirm.equalsIgnoreCase("N")) {
             	  
-                  System.out.println("Student, " + deleteThisFee + "'s fee deletion failed.");
+                  System.out.println("Student, " + deleteThisFee + "'s fee deletion failed. ☹");
                   return true;
                   
               } else {
-                  System.out.println("Invalid input. Please try again with 'Y' or 'N' !");
+                  System.out.println("Invalid input. Please try again with 'Y' or 'N' ☹");
               }
           }
       }
