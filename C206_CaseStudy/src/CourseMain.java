@@ -1,5 +1,14 @@
 //Completed by Khin
 
+/**
+ * 
+ */
+
+/**
+ * @author 22003342
+ *
+ */
+
 import java.util.ArrayList;
 
 public class CourseMain {

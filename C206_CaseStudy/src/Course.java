@@ -63,10 +63,4 @@ public class Course
 		this.schedule = schedule;
 	}
 	
-	public String toString()
-	{
-		String output = "";
-		// Write your codes here
-		return output;
-	}
 }
