@@ -1,4 +1,4 @@
-// created by kendrick
+// created by Kendrick
 public class StudentList {
 	private String studentID;
 	private String name;

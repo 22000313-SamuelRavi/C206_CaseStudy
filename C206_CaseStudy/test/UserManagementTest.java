@@ -2,9 +2,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 
@@ -126,4 +124,12 @@ public class UserManagementTest {
         assertEquals("Test that the User arraylist is empty after deleting all courses.", 0, userList.size());
     }
 
+    @After
+    public void tearDown() throws Exception {
+		user1 = null;
+	    user2 = null;
+	    user3 = null;
+	}
+
+    
 }

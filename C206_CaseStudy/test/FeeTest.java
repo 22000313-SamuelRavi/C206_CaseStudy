@@ -1,3 +1,5 @@
+//fee management test
+// Done by Priya
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
@@ -10,9 +12,6 @@ import org.junit.Test;
 
 public class FeeTest {
 	
-
-	//fee management test
-	// Done by Priya
 	private FeeManagement f1;
 	private FeeManagement f2;
 	private FeeManagement f3;

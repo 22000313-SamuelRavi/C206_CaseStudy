@@ -610,8 +610,6 @@ public class C206_CaseStudyTest {
         boolean isDeleted = UserManagement.deleteUser(userList, user1.getUsername());
         assertTrue("Test that the correct user is deleted", isDeleted);
         assertEquals("Test that the User arraylist size is now 2 after deletion.", 2, userList.size());
-        
-        assertFalse("Test that the deleted course is no longer in the list", courseList.contains(user1));
 
         
         // Error Condition:
@@ -660,6 +658,12 @@ public class C206_CaseStudyTest {
         em3 = null;
         em4 = null;
         em5 = null;
+        
+        //UserManagement
+        // DOne by Shwetha
+       user1 = null;
+       user2 = null;
+       user3 = null;
 	}
 
 	

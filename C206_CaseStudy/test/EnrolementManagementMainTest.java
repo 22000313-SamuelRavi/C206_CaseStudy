@@ -1,3 +1,4 @@
+// Completed by Samuel
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 
